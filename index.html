@@ -1,9 +1,784 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <title>测试成功</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>南阳跑腿 · 同城跑腿服务</title>
+<meta name="description" content="南阳本地跑腿服务，代买代送代排队，30分钟到达，7×24小时接单">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
+ 
+  :root {
+    --red: #e8271a;
+    --red-dark: #b51e14;
+    --gold: #f5a623;
+    --ink: #1a1410;
+    --paper: #fdf6ec;
+    --paper2: #f7ede0;
+    --gray: #8a7c72;
+    --light: #fff9f3;
+  }
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+ 
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--red);
+    color: #fff;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 40px 24px 60px;
+    text-align: center;
+  }
+ 
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(255,255,255,0.06) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(0,0,0,0.15) 0%, transparent 50%);
+  }
+ 
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image: repeating-linear-gradient(
+      45deg,
+      #fff 0px, #fff 1px,
+      transparent 1px, transparent 20px
+    ), repeating-linear-gradient(
+      -45deg,
+      #fff 0px, #fff 1px,
+      transparent 1px, transparent 20px
+    );
+  }
+ 
+  .badge {
+    display: inline-block;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 999px;
+    padding: 5px 16px;
+    font-size: 12px;
+    letter-spacing: 3px;
+    margin-bottom: 28px;
+    position: relative;
+    animation: fadeDown 0.6s ease both;
+  }
+ 
+  .hero-title {
+    font-size: clamp(32px, 11vw, 72px);
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+    position: relative;
+    animation: fadeDown 0.6s 0.1s ease both;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  }
+ 
+  .hero-sub {
+    font-size: clamp(13px, 3.5vw, 16px);
+    margin-top: 20px;
+    opacity: 0.85;
+    letter-spacing: 4px;
+    position: relative;
+    animation: fadeDown 0.6s 0.2s ease both;
+  }
+ 
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 32px;
+    position: relative;
+    animation: fadeDown 0.6s 0.3s ease both;
+  }
+ 
+  .hero-tag {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    backdrop-filter: blur(4px);
+  }
+ 
+  .hero-cta {
+    margin-top: 44px;
+    position: relative;
+    animation: fadeDown 0.6s 0.4s ease both;
+  }
+ 
+  .btn-primary {
+    display: inline-block;
+    background: #fff;
+    color: var(--red);
+    font-size: 17px;
+    font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    letter-spacing: 3px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: transform 0.15s, box-shadow 0.15s;
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+  }
+ 
+  .btn-primary:active { transform: scale(0.97); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+ 
+  .scroll-hint {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.5;
+    font-size: 11px;
+    letter-spacing: 2px;
+    animation: bounce 2s infinite;
+  }
+ 
+  .scroll-hint svg { width: 18px; height: 18px; }
+ 
+  /* ─── STATS ─── */
+  .stats {
+    background: var(--ink);
+    color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    text-align: center;
+  }
+ 
+  .stat {
+    padding: 28px 8px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+ 
+  .stat:last-child { border-right: none; }
+ 
+  .stat-num {
+    font-size: clamp(24px, 7vw, 36px);
+    font-weight: 900;
+    color: var(--gold);
+    display: block;
+    line-height: 1.1;
+  }
+ 
+  .stat-label {
+    font-size: 11px;
+    opacity: 0.5;
+    letter-spacing: 1px;
+    margin-top: 4px;
+    display: block;
+  }
+ 
+  /* ─── SERVICES ─── */
+  .section {
+    padding: 60px 24px;
+  }
+ 
+  .section-title {
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: var(--red);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+ 
+  .section-heading {
+    font-size: clamp(26px, 7vw, 36px);
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+ 
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+ 
+  .service-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 22px 18px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+ 
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+    transform-origin: left;
+  }
+ 
+  .service-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.1); }
+  .service-card:hover::after { transform: scaleX(1); }
+ 
+  .service-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+    display: block;
+  }
+ 
+  .service-name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+ 
+  .service-desc {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+ 
+  .service-card.featured {
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--red);
+    color: #fff;
+  }
+ 
+  .service-card.featured .service-desc { color: rgba(255,255,255,0.7); }
+ 
+  /* ─── HOW IT WORKS ─── */
+  .how-bg {
+    background: var(--paper2);
+  }
+ 
+  .steps {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+ 
+  .step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding-bottom: 36px;
+    position: relative;
+  }
+ 
+  .step::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--red), transparent);
+  }
+ 
+  .step:last-child::before { display: none; }
+  .step:last-child { padding-bottom: 0; }
+ 
+  .step-num {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 900;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  .step-content { flex: 1; padding-top: 6px; }
+  .step-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
+  .step-text { font-size: 13px; color: var(--gray); }
+ 
+  /* ─── PRICING ─── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+ 
+  .price-row {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+ 
+  .price-label { font-size: 15px; font-weight: 700; }
+  .price-sub { font-size: 12px; color: var(--gray); margin-top: 2px; }
+ 
+  .price-amount {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--red);
+    text-align: right;
+    white-space: nowrap;
+  }
+ 
+  .price-note { font-size: 11px; color: var(--gray); text-align: right; margin-top: 2px; }
+ 
+  /* ─── COVERAGE ─── */
+  .coverage-bg { background: var(--ink); color: #fff; }
+ 
+  .area-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+ 
+  .area-tag {
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px;
+    background: rgba(255,255,255,0.05);
+  }
+ 
+  .area-tag.active {
+    background: var(--red);
+    border-color: var(--red);
+    font-weight: 700;
+  }
+ 
+  /* ─── TESTIMONIALS ─── */
+  .reviews {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+ 
+  .review-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    position: relative;
+  }
+ 
+  .review-card::before {
+    content: '"';
+    position: absolute;
+    top: 10px; right: 18px;
+    font-size: 64px;
+    color: var(--red);
+    opacity: 0.1;
+    font-family: serif;
+    line-height: 1;
+  }
+ 
+  .review-text { font-size: 14px; line-height: 1.7; color: var(--ink); }
+  .review-author { margin-top: 12px; font-size: 12px; color: var(--gray); }
+  .review-stars { color: var(--gold); font-size: 14px; margin-bottom: 8px; }
+ 
+  /* ─── CTA BOTTOM ─── */
+  .cta-bottom {
+    background: var(--red);
+    color: #fff;
+    padding: 60px 24px;
+    text-align: center;
+  }
+ 
+  .cta-bottom h2 {
+    font-size: clamp(28px, 8vw, 42px);
+    font-weight: 900;
+    margin-bottom: 12px;
+  }
+ 
+  .cta-bottom p {
+    opacity: 0.8;
+    font-size: 14px;
+    letter-spacing: 2px;
+    margin-bottom: 36px;
+  }
+ 
+  .wechat-box {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 16px;
+    padding: 24px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    backdrop-filter: blur(8px);
+    max-width: 280px;
+    width: 100%;
+  }
+ 
+  .wechat-icon {
+    width: 56px;
+    height: 56px;
+    background: #07c160;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+ 
+  .wechat-id {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+ 
+  .wechat-hint { font-size: 12px; opacity: 0.7; }
+ 
+  .phone-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: 900;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+ 
+  /* ─── FOOTER ─── */
+  footer {
+    background: #0e0c0a;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    padding: 24px;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+ 
+  /* ─── STICKY BAR ─── */
+  .sticky-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--ink);
+    padding: 12px 20px;
+    display: flex;
+    gap: 12px;
+    z-index: 100;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.2);
+  }
+ 
+  .sticky-bar a {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 13px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 1px;
+    font-family: inherit;
+  }
+ 
+  .sticky-wechat {
+    background: #07c160;
+    color: #fff;
+  }
+ 
+  .sticky-call {
+    background: var(--red);
+    color: #fff;
+  }
+ 
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+ 
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+ 
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+ 
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+ 
+  /* bottom padding for sticky bar */
+  .content-wrap { padding-bottom: 72px; }
+ 
+  /* ─── SECTION DIVIDER ─── */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    max-width: 300px;
+    margin: 0 auto 32px;
+    opacity: 0.2;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--ink); }
+  .divider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); opacity: 1; }
+</style>
 </head>
 <body>
-  <h1>部署成功！</h1>
+<div class="content-wrap">
+ 
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-pattern"></div>
+    <div class="badge">南阳同城跑腿 · 极速配送</div>
+    <h1 class="hero-title">南阳跑腿</h1>
+    <p class="hero-sub">您的事，我们跑 · 南阳全城覆盖</p>
+    <div class="hero-tags">
+      <span class="hero-tag">⚡ 30分钟送达</span>
+      <span class="hero-tag">🌙 7×24接单</span>
+      <span class="hero-tag">💯 先验后付</span>
+    </div>
+    <div class="hero-cta">
+      <a href="tel:+8618606755302" class="btn-primary">立即呼叫跑手</a>
+    </div>
+    <div class="scroll-hint">
+      <span>了解更多</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M6 9l6 6 6-6"/>
+      </svg>
+    </div>
+  </section>
+ 
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">30'</span>
+      <span class="stat-label">平均送达</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">24H</span>
+      <span class="stat-label">全天接单</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">9.8</span>
+      <span class="stat-label">好评分数</span>
+    </div>
+  </div>
+ 
+  <!-- SERVICES -->
+  <section class="section">
+    <p class="section-title">SERVICE</p>
+    <h2 class="section-heading">我们能为您做什么</h2>
+ 
+    <div class="services-grid">
+      <div class="service-card featured fade-in">
+        <span class="service-icon">🛍️</span>
+        <div>
+          <div class="service-name">代买代购</div>
+          <div class="service-desc">超市、药店、餐饮、商场<br>拍照确认，放心购买</div>
+        </div>
+      </div>
+ 
+      <div class="service-card fade-in">
+        <span class="service-icon">📦</span>
+        <div class="service-name">代取快递</div>
+        <div class="service-desc">菜鸟驿站<br>驿站直送到家</div>
+      </div>
+ 
+      <div class="service-card fade-in">
+        <span class="service-icon">🏥</span>
+        <div class="service-name">代排队挂号</div>
+        <div class="service-desc">医院、政务<br>帮您省时间</div>
+      </div>
+ 
+      <div class="service-card fade-in">
+        <span class="service-icon">🍱</span>
+        <div class="service-name">外卖专送</div>
+        <div class="service-desc">无法配送区域<br>接力送到您手</div>
+      </div>
+ 
+      <div class="service-card fade-in">
+        <span class="service-icon">📄</span>
+        <div class="service-name">文件资料</div>
+        <div class="service-desc">合同、证件<br>安全保密配送</div>
+      </div>
+ 
+      <div class="service-card fade-in">
+        <span class="service-icon">💼</span>
+        <div class="service-name">其他跑腿</div>
+        <div class="service-desc">只要合法合规<br>都可联系我们</div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- HOW IT WORKS -->
+  <section class="section how-bg">
+    <p class="section-title">HOW TO</p>
+    <h2 class="section-heading">下单只需三步</h2>
+ 
+    <div class="steps">
+      <div class="step fade-in">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">微信 / 电话联系</div>
+          <div class="step-text">告诉我们您的需求、取件地址、送达地址，越详细越好</div>
+        </div>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">确认报价 · 立即出发</div>
+          <div class="step-text">双方确认价格后，跑手即刻出发，全程实时更新进度</div>
+        </div>
+      </div>
+      <div class="step fade-in">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">验收后付款</div>
+          <div class="step-text">收到物品满意后再付款，支持微信支付宝，安全放心</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- COVERAGE -->
+  <section class="section coverage-bg">
+    <p class="section-title" style="color:var(--gold)">COVERAGE</p>
+    <h2 class="section-heading" style="color:#fff">服务覆盖区域</h2>
+ 
+    <div class="area-tags fade-in">
+      <span class="area-tag active">卧龙区 ✓</span>
+      <span class="area-tag active">宛城区 ✓</span>
+      <span class="area-tag active">高新区 ✓</span>
+      <span class="area-tag">镇平</span>
+      <span class="area-tag">新野</span>
+      <span class="area-tag">唐河</span>
+      <span class="area-tag">南召</span>
+      <span class="area-tag">内乡</span>
+    </div>
+ 
+    <p style="text-align:center; margin-top:20px; font-size:12px; color:rgba(255,255,255,0.4); letter-spacing:2px;">
+      主城区当日达 · 县市区可提前预约
+    </p>
+  </section>
+ 
+  <!-- REVIEWS -->
+  <section class="section">
+    <p class="section-title">REVIEWS</p>
+    <h2 class="section-heading">客户怎么说</h2>
+ 
+    <div class="reviews">
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">孩子发烧，药店的药我没法去取，联系南阳跑腿15分钟就送到了，真的太及时了，价格也公道。</div>
+        <div class="review-author">— 张女士，卧龙区</div>
+      </div>
+ 
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">帮我在政务中心排队，全程拍照发给我，省了我半天时间，非常靠谱！以后常用。</div>
+        <div class="review-author">— 李先生，高新区</div>
+      </div>
+ 
+      <div class="review-card fade-in">
+        <div class="review-stars">★★★★☆</div>
+        <div class="review-text">深夜12点帮我取了驿站的快递，没有多收很多钱，态度也很好，值得推荐。</div>
+        <div class="review-author">— 王同学，宛城区</div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- CTA BOTTOM -->
+  <section class="cta-bottom">
+    <h2>随时联系我们</h2>
+    <p>7 × 24 小时在线 · 快速响应</p>
+ 
+    <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+      <div class="wechat-box">
+        <div class="wechat-icon">💬</div>
+        <div class="wechat-hint">微信扫码 / 搜索ID</div>
+        <div class="wechat-id">dada147258dd</div>
+        <div class="wechat-hint">添加备注"跑腿"</div>
+      </div>
+ 
+      <a href="tel:+8618606755302" class="phone-link">
+        📞 186-0675-5302
+      </a>
+    </div>
+  </section>
+ 
+  <footer>
+    © 2025 南阳跑腿 · 同城跑腿服务 &nbsp;|&nbsp; 合法合规 · 安全可靠
+  </footer>
+ 
+</div>
+ 
+<!-- STICKY BOTTOM BAR -->
+<div class="sticky-bar">
+  <a href="weixin://" class="sticky-wechat">💬 微信咨询</a>
+  <a href="tel:+8618606755302" class="sticky-call">📞 立即拨打</a>
+</div>
+ 
+<script>
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 60 * (entry.target.dataset.delay || 0));
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+ 
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.dataset.delay = i % 4;
+    observer.observe(el);
+  });
+</script>
 </body>
 </html>
