@@ -2,9 +2,83 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>南阳跑腿 · 同城跑腿服务</title>
-<meta name="description" content="南阳本地跑腿服务，代买代送代排队，30分钟到达，7×24小时接单">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<!-- 改进的SEO Meta标签 -->
+<title>南阳跑腿 - 30分钟同城快速配送，代买代购、医院挂号、快递代取</title>
+<meta name="description" content="南阳跑腿服务，同城快速配送30分钟送达，代买代购、代取快递、医院挂号排队、文件配送，7×24小时接单，先验后付，南阳全城覆盖卧龙区宛城区高新区">
+<meta name="keywords" content="南阳跑腿,南阳同城跑腿,南阳代跑腿,南阳代购,南阳快速配送,南阳同城配送,南阳快递代取,南阳医院挂号">
+<meta name="author" content="南阳跑腿">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph社交分享 -->
+<meta property="og:title" content="南阳跑腿 - 30分钟送达的同城快速配送">
+<meta property="og:description" content="代买代购、代取快递、医院挂号排队，全城覆盖，7×24小时接单，先验后付">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://xn--6kr078hlzhini.icu/">
+
+<!-- Schema结构化数据 - LocalBusiness -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "南阳跑腿",
+  "description": "南阳同城跑腿快递配送服务，30分钟送达",
+  "url": "https://xn--6kr078hlzhini.icu/",
+  "telephone": "+86-18606755302",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "南阳市卧龙区",
+    "addressLocality": "南阳",
+    "addressRegion": "河南",
+    "postalCode": "473000",
+    "addressCountry": "CN"
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": "卧龙区"
+    },
+    {
+      "@type": "City",
+      "name": "宛城区"
+    },
+    {
+      "@type": "City",
+      "name": "高新区"
+    },
+    {
+      "@type": "City",
+      "name": "镇平"
+    },
+    {
+      "@type": "City",
+      "name": "新野"
+    },
+    {
+      "@type": "City",
+      "name": "唐河"
+    }
+  ],
+  "priceRange": "5-50",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "9.8",
+    "ratingCount": "200",
+    "bestRating": "10",
+    "worstRating": "1"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "opens": "00:00",
+    "closes": "23:59"
+  },
+  "sameAs": []
+}
+</script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&display=swap');
  
@@ -122,6 +196,10 @@
     margin-top: 44px;
     position: relative;
     animation: fadeDown 0.6s 0.4s ease both;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
   }
  
   .btn-primary {
@@ -141,7 +219,31 @@
     border: none;
   }
  
-  .btn-primary:active { transform: scale(0.97); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+  .btn-primary:active { 
+    transform: scale(0.97); 
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15); 
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    letter-spacing: 3px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    transition: transform 0.15s, box-shadow 0.15s;
+    font-family: inherit;
+    cursor: pointer;
+    border: 2px solid rgba(255,255,255,0.5);
+  }
+
+  .btn-secondary:active {
+    transform: scale(0.97);
+  }
  
   .scroll-hint {
     position: absolute;
@@ -327,38 +429,7 @@
   .step-title { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
   .step-text { font-size: 13px; color: var(--gray); }
  
-  /* ─── PRICING ─── */
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    max-width: 480px;
-    margin: 0 auto;
-  }
- 
-  .price-row {
-    background: #fff;
-    border-radius: 12px;
-    padding: 18px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-  }
- 
-  .price-label { font-size: 15px; font-weight: 700; }
-  .price-sub { font-size: 12px; color: var(--gray); margin-top: 2px; }
- 
-  .price-amount {
-    font-size: 20px;
-    font-weight: 900;
-    color: var(--red);
-    text-align: right;
-    white-space: nowrap;
-  }
- 
-  .price-note { font-size: 11px; color: var(--gray); text-align: right; margin-top: 2px; }
- 
+
   /* ─── COVERAGE ─── */
   .coverage-bg { background: var(--ink); color: #fff; }
  
@@ -415,6 +486,91 @@
   .review-text { font-size: 14px; line-height: 1.7; color: var(--ink); }
   .review-author { margin-top: 12px; font-size: 12px; color: var(--gray); }
   .review-stars { color: var(--gold); font-size: 14px; margin-bottom: 8px; }
+
+  /* ─── FAQ ─── */
+  .faq-section {
+    background: var(--paper2);
+  }
+
+  .faq-container {
+    max-width: 520px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  details {
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    transition: box-shadow 0.2s;
+  }
+
+  details:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  details[open] {
+    background: #fff9f3;
+  }
+
+  summary {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--ink);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+
+  summary::after {
+    content: '▼';
+    font-size: 12px;
+    transition: transform 0.2s;
+    margin-left: 8px;
+  }
+
+  details[open] summary::after {
+    transform: rotate(180deg);
+  }
+
+  details p {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.6;
+  }
+
+  /* ─── TRUST BADGES ─── */
+  .trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+
+  .badge-item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .badge-icon {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+
+  .badge-text {
+    font-size: 12px;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 1px;
+  }
  
   /* ─── CTA BOTTOM ─── */
   .cta-bottom {
@@ -436,13 +592,20 @@
     letter-spacing: 2px;
     margin-bottom: 36px;
   }
- 
+
+  .contact-methods {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
   .wechat-box {
     background: rgba(255,255,255,0.15);
     border: 2px solid rgba(255,255,255,0.4);
     border-radius: 16px;
     padding: 24px;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
@@ -463,23 +626,66 @@
   }
  
   .wechat-id {
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 900;
     letter-spacing: 2px;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 6px;
+    transition: background 0.2s;
+    user-select: all;
+  }
+
+  .wechat-id:hover {
+    background: rgba(255,255,255,0.1);
   }
  
-  .wechat-hint { font-size: 12px; opacity: 0.7; }
- 
+  .wechat-hint { 
+    font-size: 12px; 
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  .wechat-hint:active {
+    opacity: 1;
+  }
+
+  .phone-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .phone-label {
+    font-size: 12px;
+    opacity: 0.7;
+    letter-spacing: 1px;
+  }
+
   .phone-link {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 20px;
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 900;
     color: #fff;
     text-decoration: none;
     letter-spacing: 1px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: background 0.2s;
+    user-select: all;
+  }
+
+  .phone-link:active {
+    background: rgba(0,0,0,0.1);
+  }
+
+  .phone-copy-hint {
+    font-size: 10px;
+    opacity: 0.6;
+    margin-top: 4px;
   }
  
   /* ─── FOOTER ─── */
@@ -496,12 +702,12 @@
   .sticky-bar {
     position: fixed;
     bottom: 0; left: 0; right: 0;
-    background: var(--ink);
-    padding: 12px 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.85));
+    padding: 12px 16px 16px;
     display: flex;
     gap: 12px;
     z-index: 100;
-    box-shadow: 0 -4px 24px rgba(0,0,0,0.2);
+    box-shadow: 0 -4px 32px rgba(0,0,0,0.3);
   }
  
   .sticky-bar a {
@@ -510,23 +716,37 @@
     align-items: center;
     justify-content: center;
     gap: 6px;
-    padding: 13px;
-    border-radius: 10px;
-    font-size: 15px;
-    font-weight: 700;
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 900;
     text-decoration: none;
     letter-spacing: 1px;
     font-family: inherit;
+    transition: transform 0.1s, box-shadow 0.1s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+ 
+  .sticky-bar a:active { 
+    transform: scale(0.95);
   }
  
   .sticky-wechat {
     background: #07c160;
     color: #fff;
   }
+
+  .sticky-wechat:active {
+    box-shadow: 0 2px 8px rgba(7,193,96,0.4);
+  }
  
   .sticky-call {
     background: var(--red);
     color: #fff;
+  }
+
+  .sticky-call:active {
+    box-shadow: 0 2px 8px rgba(232,39,26,0.4);
   }
  
   /* ─── ANIMATIONS ─── */
@@ -552,7 +772,7 @@
   }
  
   /* bottom padding for sticky bar */
-  .content-wrap { padding-bottom: 72px; }
+  .content-wrap { padding-bottom: 84px; }
  
   /* ─── SECTION DIVIDER ─── */
   .divider {
@@ -582,7 +802,8 @@
       <span class="hero-tag">💯 先验后付</span>
     </div>
     <div class="hero-cta">
-      <a href="tel:+8618606755302" class="btn-primary">立即呼叫跑手</a>
+      <a href="tel:+8618606755302" class="btn-primary">📞 现在就叫</a>
+      <a href="javascript:void(0)" onclick="copyWechatID('dada147258dd')" class="btn-secondary">💬 微信联系</a>
     </div>
     <div class="scroll-hint">
       <span>了解更多</span>
@@ -611,7 +832,7 @@
   <!-- SERVICES -->
   <section class="section">
     <p class="section-title">SERVICE</p>
-    <h2 class="section-heading">我们能为您做什么</h2>
+    <h2 class="section-heading">南阳跑腿服务项目</h2>
  
     <div class="services-grid">
       <div class="service-card featured fade-in">
@@ -657,7 +878,7 @@
   <!-- HOW IT WORKS -->
   <section class="section how-bg">
     <p class="section-title">HOW TO</p>
-    <h2 class="section-heading">下单只需三步</h2>
+    <h2 class="section-heading">南阳跑腿下单三步</h2>
  
     <div class="steps">
       <div class="step fade-in">
@@ -683,11 +904,12 @@
       </div>
     </div>
   </section>
- 
+
+
   <!-- COVERAGE -->
   <section class="section coverage-bg">
     <p class="section-title" style="color:var(--gold)">COVERAGE</p>
-    <h2 class="section-heading" style="color:#fff">服务覆盖区域</h2>
+    <h2 class="section-heading" style="color:#fff">南阳跑腿服务覆盖区域</h2>
  
     <div class="area-tags fade-in">
       <span class="area-tag active">卧龙区 ✓</span>
@@ -708,7 +930,7 @@
   <!-- REVIEWS -->
   <section class="section">
     <p class="section-title">REVIEWS</p>
-    <h2 class="section-heading">客户怎么说</h2>
+    <h2 class="section-heading">用户评价</h2>
  
     <div class="reviews">
       <div class="review-card fade-in">
@@ -730,38 +952,96 @@
       </div>
     </div>
   </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section">
+    <p class="section-title">FAQ</p>
+    <h2 class="section-heading">常见问题</h2>
+
+    <div class="faq-container">
+      <details class="fade-in">
+        <summary>30分钟送达是保证吗？</summary>
+        <p>
+          30分钟是我们的平均送达时间。高峰期可能需要45分钟左右。如果有特殊情况，跑手会提前通知您。
+        </p>
+      </details>
+
+      <details class="fade-in">
+        <summary>不满意可以退款吗？</summary>
+        <p>
+          我们支持"先验后付"。如果物品与拍照不符、遗漏物品等情况，您完全可以拒付。我们的目标是让您100%满意。
+        </p>
+      </details>
+
+      <details class="fade-in">
+        <summary>怎样下单最快？</summary>
+        <p>
+          最快的方式是直接拨打我们的电话 186-0675-5302，或微信搜索 dada147258dd 添加联系。电话沟通最直接，我们会立即为您安排。
+        </p>
+      </details>
+
+      <details class="fade-in">
+        <summary>支持哪些支付方式？</summary>
+        <p>
+          支持微信支付、支付宝、现金支付。您可以根据自己的习惯选择，我们都接受。
+        </p>
+      </details>
+    </div>
+  </section>
  
   <!-- CTA BOTTOM -->
   <section class="cta-bottom">
-    <h2>随时联系我们</h2>
+    <h2>随时联系南阳跑腿</h2>
     <p>7 × 24 小时在线 · 快速响应</p>
- 
-    <div style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+
+    <div class="trust-badges">
+      <div class="badge-item">
+        <div class="badge-icon">✅</div>
+        <div class="badge-text">实名认证</div>
+      </div>
+      <div class="badge-item">
+        <div class="badge-icon">🔒</div>
+        <div class="badge-text">隐私保护</div>
+      </div>
+      <div class="badge-item">
+        <div class="badge-icon">📋</div>
+        <div class="badge-text">合法合规</div>
+      </div>
+      <div class="badge-item">
+        <div class="badge-icon">⭐</div>
+        <div class="badge-text">9.8评分</div>
+      </div>
+    </div>
+
+    <div class="contact-methods">
       <div class="wechat-box">
         <div class="wechat-icon">💬</div>
         <div class="wechat-hint">微信扫码 / 搜索ID</div>
-        <div class="wechat-id">dada147258dd</div>
-        <div class="wechat-hint">添加备注"跑腿"</div>
+        <div class="wechat-id" onclick="copyText('dada147258dd', this)">dada147258dd</div>
+        <div class="wechat-hint" onclick="copyText('dada147258dd', this)">点击复制ID</div>
       </div>
- 
-      <a href="tel:+8618606755302" class="phone-link">
-        📞 186-0675-5302
-      </a>
+
+      <div class="phone-section">
+        <div class="phone-label">或直接拨打</div>
+        <a href="tel:+8618606755302" class="phone-link">📞 186-0675-5302</a>
+        <div class="phone-copy-hint">长按复制号码</div>
+      </div>
     </div>
   </section>
  
   <footer>
-    © 2025 南阳跑腿 · 同城跑腿服务 &nbsp;|&nbsp; 合法合规 · 安全可靠
+    <p>© 2025 南阳跑腿 · 同城跑腿服务 &nbsp;|&nbsp; 合法合规 · 安全可靠</p>
+    <p style="margin-top:12px; font-size:10px; opacity:0.5;">南阳卧龙区 · 河南</p>
   </footer>
  
 </div>
  
 <!-- STICKY BOTTOM BAR -->
 <div class="sticky-bar">
-  <a href="weixin://" class="sticky-wechat">💬 微信咨询</a>
+  <a href="javascript:void(0)" onclick="copyWechatID('dada147258dd')" class="sticky-wechat">💬 微信咨询</a>
   <a href="tel:+8618606755302" class="sticky-call">📞 立即拨打</a>
 </div>
- 
+
 <script>
   // Intersection Observer for fade-in animations
   const observer = new IntersectionObserver((entries) => {
@@ -779,6 +1059,53 @@
     el.dataset.delay = i % 4;
     observer.observe(el);
   });
+
+  // WeChat复制ID函数
+  function copyWechatID(id) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(id).then(() => {
+        alert('✓ 微信ID已复制：' + id + '\n\n请打开微信搜索或添加，备注"跑腿"');
+      }).catch(() => {
+        fallbackCopy(id);
+      });
+    } else {
+      fallbackCopy(id);
+    }
+  }
+
+  // WeChat提示函数（备用）
+  function showWechatTip() {
+    alert('微信ID: dada147258dd\n\n请手动搜索添加，备注"跑腿"，我们会优先处理');
+  }
+
+  // 复制文本函数
+  function copyText(text, element) {
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text).then(() => {
+        const originalText = element.textContent;
+        element.textContent = '✓ 已复制';
+        element.style.opacity = '0.6';
+        setTimeout(() => {
+          element.textContent = originalText;
+          element.style.opacity = '1';
+        }, 2000);
+      }).catch(() => {
+        fallbackCopy(text);
+      });
+    } else {
+      fallbackCopy(text);
+    }
+  }
+
+  function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    alert('已复制: ' + text);
+  }
 </script>
 </body>
 </html>
