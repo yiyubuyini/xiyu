@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Sitemap: https://xn--6kr078hlzhini.icu/sitemap.xml
+
+# 禁止爬取非必要内容
+Disallow: /cdn-cgi/
