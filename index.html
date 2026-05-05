@@ -3,639 +3,809 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>南阳跑腿 - 专业同城配送、代办、跑腿服务</title>
-    <meta name="description" content="南阳跑腿提供政务档案、医疗健康、生活代办等专业同城服务。">
-    <meta name="keywords" content="南阳跑腿,同城配送,代办,档案调取,医院挂号">
+    <title>南阳跑腿 - 专业同城代办·跑腿服务</title>
+    <meta name="description" content="南阳跑腿提供政务档案、医疗健康、生活代办等专业同城服务。快速响应，价格透明，值得信赖。">
+    <meta name="keywords" content="南阳跑腿,同城配送,代办,档案调取,医院挂号,跑腿服务">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* ===== Reset & Base ===== */
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{
+            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
+            color:#1a1a2e;background:#fafafa;line-height:1.7;overflow-x:hidden
         }
-        
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            color: #1a1a1a;
-            background: #fff;
-            line-height: 1.6;
+        a{text-decoration:none;color:inherit}
+        .container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+
+        /* ===== Brand Colors ===== */
+        :root{
+            --primary:#f97316;--primary-dark:#ea580c;--primary-light:#fff7ed;
+            --dark:#1a1a2e;--gray:#64748b;--light:#f8fafc;--border:#e2e8f0;
+            --shadow:0 4px 24px rgba(0,0,0,.06);--radius:.75rem
         }
-        
-        /* Header */
-        header {
-            background: #fff;
-            border-bottom: 1px solid #eee;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+
+        /* ===== Scroll Animation ===== */
+        .reveal{opacity:0;transform:translateY(40px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+        .reveal.visible{opacity:1;transform:translateY(0)}
+        .reveal-left{opacity:0;transform:translateX(-40px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+        .reveal-left.visible{opacity:1;transform:translateX(0)}
+        .reveal-right{opacity:0;transform:translateX(40px);transition:all .7s cubic-bezier(.16,1,.3,1)}
+        .reveal-right.visible{opacity:1;transform:translateX(0)}
+
+        /* ===== Header ===== */
+        header{
+            position:fixed;top:0;left:0;right:0;z-index:1000;
+            background:rgba(255,255,255,.85);backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);transition:all .3s;
         }
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        header.scrolled{box-shadow:var(--shadow)}
+        .header-inner{
+            max-width:1100px;margin:0 auto;padding:.85rem 1.5rem;
+            display:flex;align-items:center;justify-content:space-between
         }
-        .logo { font-size: 1.3rem; font-weight: 600; }
-        .contact-btn {
-            background: #000;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 0.4rem;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: opacity 0.3s;
+        .logo{
+            font-size:1.35rem;font-weight:800;
+            background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text;letter-spacing:-.5px
         }
-        .contact-btn:hover { opacity: 0.8; }
-        
-        /* Hero */
-        .hero {
-            padding: 5rem 2rem 3rem;
-            background: #fff;
+        .logo span{-webkit-text-fill-color:var(--dark)}
+        .nav-links{display:flex;gap:2rem;align-items:center}
+        .nav-links a{font-size:.9rem;color:var(--gray);transition:color .3s;font-weight:500}
+        .nav-links a:hover{color:var(--primary)}
+        .contact-btn{
+            background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+            color:#fff;border:none;padding:.55rem 1.3rem;border-radius:2rem;
+            font-size:.85rem;font-weight:600;cursor:pointer;
+            transition:transform .3s,box-shadow .3s
         }
-        .hero-content { max-width: 800px; margin: 0 auto; }
-        .hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            margin-bottom: 1rem;
-            line-height: 1.2;
+        .contact-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(249,115,22,.35)}
+
+        /* ===== Hero ===== */
+        .hero{
+            min-height:100vh;display:flex;align-items:center;justify-content:center;
+            background:linear-gradient(135deg,#fff7ed 0%,#ffedd5 40%,#fef3c7 100%);
+            position:relative;overflow:hidden;padding:6rem 1.5rem 4rem
         }
-        .hero .tagline {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
+        .hero::before{
+            content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;
+            background:radial-gradient(circle,rgba(249,115,22,.08) 0%,transparent 70%);
+            border-radius:50%;pointer-events:none
         }
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
+        .hero::after{
+            content:'';position:absolute;bottom:-30%;left:-10%;width:400px;height:400px;
+            background:radial-gradient(circle,rgba(251,146,60,.06) 0%,transparent 70%);
+            border-radius:50%;pointer-events:none
         }
-        .btn {
-            padding: 0.9rem 2rem;
-            border: none;
-            border-radius: 0.4rem;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
-            display: inline-block;
+        .hero-content{position:relative;z-index:1;text-align:center;max-width:700px}
+        .hero-badge{
+            display:inline-block;padding:.35rem 1rem;border-radius:2rem;
+            background:rgba(249,115,22,.1);color:var(--primary-dark);
+            font-size:.8rem;font-weight:600;margin-bottom:1.5rem;
+            border:1px solid rgba(249,115,22,.15)
         }
-        .btn-dark {
-            background: #000;
-            color: white;
+        .hero h1{
+            font-size:clamp(2.5rem,5.5vw,4rem);font-weight:800;
+            line-height:1.15;margin-bottom:1.2rem;letter-spacing:-1px
         }
-        .btn-dark:hover { opacity: 0.85; }
-        .btn-light {
-            background: #f5f5f5;
-            color: #1a1a1a;
-            border: 1px solid #ddd;
+        .hero h1 .highlight{
+            background:linear-gradient(135deg,var(--primary),#f59e0b);
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+            background-clip:text
         }
-        .btn-light:hover { background: #eee; }
-        
-        /* Services */
-        .services {
-            padding: 4rem 2rem;
-            background: #fff;
+        .hero p{
+            font-size:clamp(1rem,1.8vw,1.15rem);color:var(--gray);
+            max-width:540px;margin:0 auto 2.2rem;line-height:1.8
         }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+        .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+        .btn{
+            padding:.9rem 2.2rem;border:none;border-radius:2rem;
+            font-size:.95rem;font-weight:600;cursor:pointer;
+            transition:all .3s;display:inline-flex;align-items:center;gap:.5rem
         }
-        .section-subtitle {
-            color: #666;
-            margin-bottom: 3rem;
-            font-size: 1rem;
+        .btn-primary{
+            background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+            color:#fff;box-shadow:0 4px 16px rgba(249,115,22,.3)
         }
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(249,115,22,.4)}
+        .btn-outline{
+            background:transparent;color:var(--dark);
+            border:2px solid var(--border)
         }
-        .service-card {
-            background: #fff;
-            border: 1px solid #eee;
-            border-radius: 0.6rem;
-            padding: 2rem;
-            transition: all 0.3s;
+        .btn-outline:hover{background:var(--light);border-color:var(--primary);color:var(--primary)}
+        .hero-stats{
+            display:flex;gap:2.5rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap
         }
-        .service-card:hover {
-            border-color: #000;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        .hero-stat{text-align:center}
+        .hero-stat-num{
+            font-size:1.8rem;font-weight:800;color:var(--dark);line-height:1
         }
-        .service-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
+        .hero-stat-label{font-size:.8rem;color:var(--gray);margin-top:.3rem}
+
+        /* ===== Section Common ===== */
+        section{padding:5rem 0}
+        .section-label{
+            display:inline-block;font-size:.8rem;font-weight:700;
+            text-transform:uppercase;letter-spacing:2px;color:var(--primary);
+            margin-bottom:.5rem
         }
-        .service-card ul { list-style: none; }
-        .service-card li {
-            padding: 0.4rem 0 0.4rem 1.5rem;
-            color: #666;
-            font-size: 0.9rem;
-            position: relative;
+        .section-title{
+            font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;
+            margin-bottom:.8rem;letter-spacing:-.5px
         }
-        .service-card li::before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            font-weight: bold;
+        .section-subtitle{
+            color:var(--gray);font-size:1rem;max-width:600px;margin-bottom:3rem
         }
-        
-        /* Features */
-        .why-us {
-            padding: 4rem 2rem;
-            background: #f5f5f5;
+        .text-center{text-align:center}
+        .mx-auto{margin-left:auto;margin-right:auto}
+
+        /* ===== Services ===== */
+        #services{background:#fff}
+        .services-grid{
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:1.5rem
         }
-        .why-us-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        .service-card{
+            background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+            padding:2rem;transition:all .4s;position:relative;overflow:hidden
         }
-        .feature { text-align: left; }
-        .feature-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            display: inline-block;
+        .service-card::before{
+            content:'';position:absolute;top:0;left:0;right:0;height:3px;
+            background:linear-gradient(90deg,var(--primary),#f59e0b);
+            transform:scaleX(0);transform-origin:left;transition:transform .4s
         }
-        .feature h4 {
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-            font-weight: 600;
+        .service-card:hover{
+            border-color:var(--primary);transform:translateY(-6px);
+            box-shadow:0 12px 36px rgba(249,115,22,.1)
         }
-        .feature p {
-            color: #666;
-            font-size: 0.9rem;
-            line-height: 1.6;
+        .service-card:hover::before{transform:scaleX(1)}
+        .service-icon{font-size:2.2rem;margin-bottom:1rem;display:inline-block}
+        .service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:1rem}
+        .service-card ul{list-style:none}
+        .service-card li{
+            padding:.35rem 0 .35rem 1.4rem;color:var(--gray);font-size:.88rem;
+            position:relative
         }
-        
-        /* How It Works */
-        .how-it-works {
-            padding: 4rem 2rem;
-            background: #fff;
+        .service-card li::before{
+            content:"✓";position:absolute;left:0;color:var(--primary);font-weight:700
         }
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        .service-price{
+            margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);
+            font-size:.85rem;color:var(--gray)
         }
-        .step { padding: 2rem; text-align: center; }
-        .step-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            background: #000;
-            color: white;
-            border-radius: 50%;
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+        .service-price strong{color:var(--primary-dark);font-size:1.1rem}
+
+        /* ===== Why Us ===== */
+        #why-us{background:var(--primary-light)}
+        .features-grid{
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:1.5rem
         }
-        .step h4 { margin-bottom: 0.5rem; font-weight: 600; }
-        .step p { color: #666; font-size: 0.9rem; }
-        
-        /* FAQ */
-        .faq {
-            padding: 4rem 2rem;
-            background: #f5f5f5;
+        .feature-card{
+            background:#fff;border-radius:var(--radius);padding:2rem;
+            transition:all .4s;border:1px solid transparent
         }
-        .faq-grid {
-            display: grid;
-            gap: 0.5rem;
-            margin-top: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+        .feature-card:hover{
+            border-color:var(--border);transform:translateY(-4px);box-shadow:var(--shadow)
         }
-        .faq-item {
-            background: white;
-            border: 1px solid #eee;
-            border-radius: 0.6rem;
-            overflow: hidden;
+        .feature-icon{font-size:2rem;margin-bottom:.8rem}
+        .feature-card h4{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+        .feature-card p{font-size:.88rem;color:var(--gray);line-height:1.6}
+
+        /* ===== Process ===== */
+        #process{background:#fff}
+        .steps{
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:2rem;position:relative
         }
-        .faq-question {
-            padding: 1.3rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 500;
-            user-select: none;
-            transition: background 0.3s;
+        .steps::before{
+            content:'';position:absolute;top:2.5rem;left:15%;right:15%;
+            height:2px;background:linear-gradient(90deg,var(--primary),var(--border),transparent);
+            display:none
         }
-        .faq-question:hover { background: #f9f9f9; }
-        .faq-toggle {
-            font-size: 1rem;
-            transition: transform 0.3s;
-            color: #666;
+        @media(min-width:768px){.steps::before{display:block}}
+        .step{text-align:center;position:relative}
+        .step-num{
+            width:56px;height:56px;line-height:56px;border-radius:50%;
+            background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+            color:#fff;font-size:1.3rem;font-weight:700;margin:0 auto 1.2rem;
+            position:relative;z-index:1;box-shadow:0 4px 16px rgba(249,115,22,.25)
         }
-        .faq-item.active .faq-toggle { transform: rotate(180deg); }
-        .faq-answer {
-            padding: 0 1.3rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.3s;
-            color: #666;
-            line-height: 1.7;
-            font-size: 0.9rem;
+        .step h4{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+        .step p{font-size:.88rem;color:var(--gray);max-width:280px;margin:0 auto}
+
+        /* ===== Testimonials ===== */
+        #testimonials{background:var(--light)}
+        .testimonials-grid{
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+            gap:1.5rem
         }
-        .faq-item.active .faq-answer {
-            padding: 1.3rem;
-            max-height: 500px;
+        .testimonial-card{
+            background:#fff;border-radius:var(--radius);padding:1.8rem;
+            border:1px solid var(--border);transition:all .3s
         }
-        
-        /* CTA */
-        .cta {
-            background: #000;
-            color: white;
-            padding: 3.5rem 2rem;
-            text-align: center;
+        .testimonial-card:hover{box-shadow:var(--shadow)}
+        .testimonial-stars{color:#f59e0b;font-size:.9rem;margin-bottom:.8rem}
+        .testimonial-text{
+            font-size:.9rem;color:var(--gray);line-height:1.7;margin-bottom:1rem;
+            font-style:italic
         }
-        .cta h2 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
+        .testimonial-author{font-size:.85rem;font-weight:600;color:var(--dark)}
+        .testimonial-tag{
+            display:inline-block;font-size:.75rem;padding:.15rem .6rem;
+            border-radius:1rem;background:var(--primary-light);color:var(--primary-dark);
+            margin-left:.5rem;font-weight:500
         }
-        .cta .cta-desc {
-            font-size: 1rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+
+        /* ===== FAQ ===== */
+        #faq{background:var(--primary-light)}
+        .faq-list{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:.6rem}
+        .faq-item{
+            background:#fff;border-radius:var(--radius);overflow:hidden;
+            border:1px solid var(--border);transition:all .3s
         }
-        
-        /* Footer */
-        footer {
-            background: #fff;
-            border-top: 1px solid #eee;
-            color: #666;
-            padding: 2rem;
-            text-align: center;
-            font-size: 0.9rem;
+        .faq-item:hover{border-color:rgba(249,115,22,.2)}
+        .faq-q{
+            padding:1.2rem 1.5rem;cursor:pointer;
+            display:flex;justify-content:space-between;align-items:center;
+            font-weight:600;font-size:.95rem;user-select:none;
+            transition:background .3s
         }
-        .footer-content { max-width: 1200px; margin: 0 auto; }
-        .footer-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
+        .faq-q:hover{background:var(--light)}
+        .faq-toggle{
+            font-size:.8rem;color:var(--gray);transition:transform .3s;
+            flex-shrink:0;margin-left:1rem
         }
-        
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
+        .faq-item.open .faq-toggle{transform:rotate(180deg);color:var(--primary)}
+        .faq-a{
+            max-height:0;overflow:hidden;transition:all .4s cubic-bezier(.16,1,.3,1);
+            color:var(--gray);font-size:.9rem;line-height:1.7;
+            padding:0 1.5rem
         }
-        .modal.show {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .faq-item.open .faq-a{
+            max-height:400px;padding:0 1.5rem 1.3rem
         }
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 0.8rem;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            position: relative;
+
+        /* ===== CTA ===== */
+        .cta{
+            background:linear-gradient(135deg,#1a1a2e 0%,#2d2d5e 100%);
+            color:#fff;text-align:center;padding:4.5rem 1.5rem;
+            position:relative;overflow:hidden
         }
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #999;
+        .cta::before{
+            content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+            background:radial-gradient(circle at 30% 50%,rgba(249,115,22,.1) 0%,transparent 50%);
+            pointer-events:none
         }
-        .modal h3 {
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-            color: #000;
+        .cta .container{position:relative;z-index:1}
+        .cta h2{font-size:clamp(1.8rem,3vw,2.3rem);font-weight:800;margin-bottom:.5rem}
+        .cta p{opacity:.8;margin-bottom:2rem;font-size:1rem}
+        .cta .btn-primary{box-shadow:0 4px 20px rgba(249,115,22,.4)}
+        .cta .btn-primary:hover{box-shadow:0 8px 32px rgba(249,115,22,.5)}
+
+        /* ===== Footer ===== */
+        footer{
+            background:var(--dark);color:rgba(255,255,255,.7);
+            padding:3rem 1.5rem 2rem;font-size:.88rem
         }
-        .modal p {
-            color: #666;
-            margin-bottom: 1.5rem;
-            font-size: 0.95rem;
+        .footer-grid{
+            max-width:1100px;margin:0 auto;
+            display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+            gap:2rem;margin-bottom:2rem
         }
-        .modal-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .footer-col h5{color:#fff;font-size:.95rem;font-weight:700;margin-bottom:1rem}
+        .footer-col p,.footer-col a{display:block;color:rgba(255,255,255,.6);margin-bottom:.4rem;transition:color .3s}
+        .footer-col a:hover{color:var(--primary)}
+        .footer-bottom{
+            max-width:1100px;margin:0 auto;padding-top:1.5rem;
+            border-top:1px solid rgba(255,255,255,.08);
+            text-align:center;font-size:.82rem;color:rgba(255,255,255,.4)
         }
-        .modal-item {
-            padding: 1.2rem;
-            background: #f5f5f5;
-            border-radius: 0.4rem;
+
+        /* ===== Modal ===== */
+        .modal{
+            display:none;position:fixed;z-index:9999;
+            left:0;top:0;width:100%;height:100%;
+            background:rgba(0,0,0,.5);backdrop-filter:blur(4px);
+            align-items:center;justify-content:center;
+            opacity:0;transition:opacity .3s
         }
-        .modal-item-label {
-            font-size: 0.9rem;
-            color: #999;
-            margin-bottom: 0.5rem;
+        .modal.show{display:flex;opacity:1}
+        .modal-panel{
+            background:#fff;border-radius:1rem;padding:2.2rem;
+            width:92%;max-width:380px;text-align:center;
+            transform:scale(.9);transition:transform .3s cubic-bezier(.16,1,.3,1)
         }
-        .modal-item-value {
-            font-size: 1.1rem;
-            font-weight: 600;
-            font-family: monospace;
-            color: #000;
+        .modal.show .modal-panel{transform:scale(1)}
+        .modal-close{
+            float:right;background:none;border:none;font-size:1.5rem;
+            cursor:pointer;color:var(--gray);line-height:1;padding:.2rem
         }
-        
-        @media (max-width: 768px) {
-            .header-container { padding: 0 1rem; }
-            .hero { padding: 3rem 1rem 2rem; }
-            .hero h1 { font-size: 2rem; }
-            .hero-buttons { flex-direction: column; }
-            .btn { width: 100%; }
-            .services, .why-us, .how-it-works, .faq, .cta { padding: 3rem 1rem; }
-            .section-title { font-size: 1.8rem; }
-            .cta h2 { font-size: 1.5rem; }
+        .modal-icon{font-size:2.5rem;margin-bottom:.8rem}
+        .modal h3{font-size:1.2rem;font-weight:700;margin-bottom:.4rem}
+        .modal .modal-desc{color:var(--gray);font-size:.88rem;margin-bottom:1.5rem}
+        .modal-contact{margin-bottom:1.2rem}
+        .modal-contact-item{
+            background:var(--light);border-radius:.6rem;padding:1rem;
+            margin-bottom:.6rem;display:flex;align-items:center;gap:.8rem
         }
+        .modal-contact-label{
+            font-size:.75rem;color:var(--gray);font-weight:600;
+            background:var(--border);padding:.15rem .5rem;border-radius:.3rem;
+            flex-shrink:0
+        }
+        .modal-contact-value{font-weight:600;font-size:.95rem;color:var(--dark);word-break:break-all}
+        .modal-copy-btn{
+            margin-left:auto;background:none;border:1px solid var(--border);
+            border-radius:.4rem;padding:.3rem .5rem;font-size:.75rem;
+            cursor:pointer;color:var(--gray);transition:all .2s;
+            flex-shrink:0
+        }
+        .modal-copy-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+        .modal-actions{display:flex;flex-direction:column;gap:.6rem}
+        .modal-actions .btn{width:100%;justify-content:center}
+
+        /* ===== Floating Contact ===== */
+        .float-wx{
+            position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;
+            width:56px;height:56px;border-radius:50%;
+            background:linear-gradient(135deg,#25D366,#128C7E);
+            color:#fff;display:flex;align-items:center;justify-content:center;
+            font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,.35);
+            cursor:pointer;transition:all .3s;border:none
+        }
+        .float-wx:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,.45)}
+        .float-wx-tooltip{
+            position:absolute;right:66px;top:50%;transform:translateY(-50%);
+            background:#fff;color:var(--dark);font-size:.78rem;font-weight:600;
+            padding:.4rem .8rem;border-radius:.4rem;white-space:nowrap;
+            box-shadow:0 2px 12px rgba(0,0,0,.1);display:none
+        }
+        .float-wx:hover .float-wx-tooltip{display:block}
+
+        /* ===== Back to Top ===== */
+        .back-top{
+            position:fixed;bottom:1.5rem;left:1.5rem;z-index:999;
+            width:44px;height:44px;border-radius:50%;
+            background:#fff;color:var(--dark);border:1px solid var(--border);
+            display:flex;align-items:center;justify-content:center;
+            font-size:1.2rem;cursor:pointer;opacity:0;pointer-events:none;
+            transition:all .3s;box-shadow:var(--shadow)
+        }
+        .back-top.show{opacity:1;pointer-events:auto}
+        .back-top:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+        /* ===== Mobile ===== */
+        @media(max-width:768px){
+            .nav-links{display:none}
+            .hero{padding:5rem 1rem 3rem}
+            .hero-stats{gap:1.5rem}
+            .hero-stat-num{font-size:1.3rem}
+            section{padding:3.5rem 0}
+            .services-grid,.features-grid,.testimonials-grid{gap:1rem}
+            .service-card,.feature-card{padding:1.5rem}
+            .footer-grid{grid-template-columns:1fr 1fr}
+            .float-wx{width:50px;height:50px;font-size:1.4rem;bottom:1rem;right:1rem}
+            .back-top{width:38px;height:38px;font-size:1rem;bottom:1rem;left:1rem}
+        }
+        @media(max-width:480px){
+            .hero-actions{flex-direction:column;align-items:stretch}
+            .hero h1{font-size:2rem}
+            .footer-grid{grid-template-columns:1fr}
+        }
+
+        /* ===== Toast ===== */
+        .toast{
+            position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);
+            background:var(--dark);color:#fff;padding:.6rem 1.2rem;
+            border-radius:2rem;font-size:.82rem;opacity:0;
+            transition:all .4s;z-index:99999;pointer-events:none
+        }
+        .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo">南阳跑腿</div>
+
+<!-- ===== Header ===== -->
+<header id="header">
+    <div class="header-inner">
+        <div class="logo">🏃 <span>南阳跑腿</span></div>
+        <nav class="nav-links">
+            <a href="#services">服务</a>
+            <a href="#why-us">优势</a>
+            <a href="#faq">常见问题</a>
             <button class="contact-btn" onclick="openModal()">微信联系</button>
+        </nav>
+    </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-badge">📍 南阳本地 · 专业跑腿服务</div>
+        <h1>
+            生活琐事<br>
+            <span class="highlight">我来跑腿</span>
+        </h1>
+        <p>
+            档案调取 · 医疗挂号 · 生活代办 · 同城配送<br>
+            专业、快速、诚信的一站式服务
+        </p>
+        <div class="hero-actions">
+            <button class="btn btn-primary" onclick="openModal()">💬 立即咨询</button>
+            <a href="#services" class="btn btn-outline">📋 查看服务</a>
         </div>
-    </header>
-    
-    <!-- Hero -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>生活琐事，我来跑腿</h1>
-            <p class="tagline">档案调取、医疗挂号、生活代办、同城配送<br>专业、快速、诚信的一站式服务</p>
-            <div class="hero-buttons">
-                <button class="btn btn-dark" onclick="openModal()">立即咨询</button>
-                <a href="#services" class="btn btn-light">查看服务</a>
+        <div class="hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-num">300+</div>
+                <div class="hero-stat-label">已完成订单</div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Services -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">我们的服务</h2>
-            <p class="section-subtitle">覆盖日常生活的各个方面</p>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>📋 政务/档案类</h3>
-                    <ul>
-                        <li>调档案、开存档证明</li>
-                        <li>政审表、核实表</li>
-                        <li>成绩单、实习证明</li>
-                        <li>退休办理、户籍问题</li>
-                        <li>居住证、社保补缴</li>
-                    </ul>
-                </div>
-                <div class="service-card">
-                    <h3>🏥 医疗健康类</h3>
-                    <ul>
-                        <li>医院取药/挂号/取报告</li>
-                        <li>陪诊、代问诊</li>
-                        <li>买处方药、非处方药</li>
-                        <li>医保业务办理</li>
-                        <li>健康咨询转介</li>
-                    </ul>
-                </div>
-                <div class="service-card">
-                    <h3>🛍️ 生活代办类</h3>
-                    <ul>
-                        <li>代买东西、代取快递</li>
-                        <li>代交水电费/罚款</li>
-                        <li>代听课/代会议</li>
-                        <li>代送物品、代排队</li>
-                        <li>其他生活代办</li>
-                    </ul>
-                </div>
-                <div class="service-card">
-                    <h3>⭐ 其他专业服务</h3>
-                    <ul>
-                        <li>驾照代考相关</li>
-                        <li>外币兑换代办</li>
-                        <li>税务申报服务</li>
-                        <li>留学/学历相关</li>
-                        <li>律师代办、代购等</li>
-                    </ul>
-                </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num">98%</div>
+                <div class="hero-stat-label">客户好评</div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Features -->
-    <section class="why-us">
-        <div class="container">
-            <h2 class="section-title">为什么选择我们</h2>
-            <p class="section-subtitle">用心服务，值得信赖</p>
-            <div class="why-us-grid">
-                <div class="feature">
-                    <div class="feature-icon">⚡</div>
-                    <h4>快速高效</h4>
-                    <p>平均30分钟响应，快速处理，让您省时间</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">💰</div>
-                    <h4>价格透明</h4>
-                    <p>无隐性收费，价格公开，支持多种支付</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">🛡️</div>
-                    <h4>安全可靠</h4>
-                    <p>严格保护隐私，真实认证，信息加密</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">👨‍💼</div>
-                    <h4>专业团队</h4>
-                    <p>经验丰富的代办专家，各类服务专人负责</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">📱</div>
-                    <h4>随时沟通</h4>
-                    <p>微信实时沟通，全程透明跟进，随时反馈</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-icon">⭐</div>
-                    <h4>用户优先</h4>
-                    <p>客户满意度第一，坚持做好每一个订单</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <h2 class="section-title">服务流程</h2>
-            <p class="section-subtitle">三步享受专业服务</p>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h4>在线咨询</h4>
-                    <p>微信描述需求，获得专业建议和报价</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h4>确认订单</h4>
-                    <p>确认费用和时间，支付定金即可开始处理</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h4>完成交付</h4>
-                    <p>任务完成后上门交付，支付尾款结算</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FAQ -->
-    <section class="faq">
-        <div class="container">
-            <h2 class="section-title">常见问题</h2>
-            <p class="section-subtitle">您最关心的问题都在这里</p>
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>服务范围是多少?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        我们主要服务南阳市区及周边地区。大部分服务可在南阳全市范围内完成。如需特殊地点，欢迎咨询客服。
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>如何保证信息安全?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        我们采取严格的信息保护措施，所有客户信息都加密存储。服务人员签署保密协议，坚决不向第三方泄露任何隐私。
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>服务不满意怎么办?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        我们承诺100%满意。如有不满意，联系客服，48小时内处理，确保问题圆满解决。
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>支持哪些支付方式?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        支持微信支付、支付宝、银行转账等多种方式。大多数订单需先支付定金，完成后支付尾款。
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>可以加急处理吗?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        可以。告诉客服您需要加急，我们会尽力为您安排。加急服务会相应增加费用，具体费用请咨询客服。
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>怎样预约服务?</span>
-                        <span class="faq-toggle">▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        最简单的方式是添加微信，告诉客服您的需求。客服会在您方便的时间处理。支持提前预约和紧急临时服务。
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- CTA -->
-    <section class="cta">
-        <div class="container">
-            <h2>立即开始</h2>
-            <p class="cta-desc">一条微信消息，生活变简单</p>
-            <button class="btn btn-light" onclick="openModal()" style="margin-top: 1rem;">点击联系我们</button>
-            <p style="margin-top: 1.5rem; opacity: 0.8; font-size: 0.9rem;">
-                工作时间：8:00 - 22:00 | 周末照常服务 | 紧急订单随时响应
-            </p>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-info">
-                <span>📱 微信: dada147258dd</span>
-                <span>☎️ 电话: 18606755302</span>
-                <span>📍 南阳市及周边</span>
-            </div>
-            <p style="margin-bottom: 0.5rem;">© 2024 南阳跑腿 | 您身边的专业生活服务助手</p>
-            <p style="opacity: 0.6;">24小时客服在线 | 快速 · 专业 · 诚信</p>
-        </div>
-    </footer>
-    
-    <!-- Modal -->
-    <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">×</button>
-            <h3>联系我们</h3>
-            <p>添加微信或拨打电话，我们随时为您服务</p>
-            <div class="modal-buttons">
-                <div class="modal-item">
-                    <div class="modal-item-label">微信号</div>
-                    <div class="modal-item-value">dada147258dd</div>
-                </div>
-                <div class="modal-item">
-                    <div class="modal-item-label">电话号码</div>
-                    <div class="modal-item-value">18606755302</div>
-                </div>
-                <a href="tel:18606755302" class="btn btn-dark" style="width: 100%;">📞 拨打电话</a>
+            <div class="hero-stat">
+                <div class="hero-stat-num">30min</div>
+                <div class="hero-stat-label">快速响应</div>
             </div>
         </div>
     </div>
-    
-    <script>
-        const modal = document.getElementById('contactModal');
-        
-        function openModal() {
-            modal.classList.add('show');
-        }
-        
-        function closeModal() {
-            modal.classList.remove('show');
-        }
-        
-        // 点击背景关闭弹窗
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
+</section>
+
+<!-- ===== Services ===== -->
+<section id="services">
+    <div class="container text-center">
+        <div class="section-label">Services</div>
+        <h2 class="section-title">我们的服务</h2>
+        <p class="section-subtitle mx-auto">覆盖日常生活的各个方面，为您省时省心</p>
+    </div>
+    <div class="container">
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">📋</div>
+                <h3>政务/档案类</h3>
+                <ul>
+                    <li>调档案、开存档证明</li>
+                    <li>政审表、核实表</li>
+                    <li>成绩单、实习证明</li>
+                    <li>退休办理、户籍问题</li>
+                    <li>居住证、社保补缴</li>
+                </ul>
+                <div class="service-price">起步价 <strong>¥30</strong></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">🏥</div>
+                <h3>医疗健康类</h3>
+                <ul>
+                    <li>医院取药/挂号/取报告</li>
+                    <li>陪诊、代问诊</li>
+                    <li>买处方药、非处方药</li>
+                    <li>医保业务办理</li>
+                    <li>健康咨询转介</li>
+                </ul>
+                <div class="service-price">起步价 <strong>¥50</strong></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">🛍️</div>
+                <h3>生活代办类</h3>
+                <ul>
+                    <li>代买东西、代取快递</li>
+                    <li>代交水电费/罚款</li>
+                    <li>代听课/代会议</li>
+                    <li>代送物品、代排队</li>
+                    <li>其他生活代办</li>
+                </ul>
+                <div class="service-price">起步价 <strong>¥20</strong></div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">⭐</div>
+                <h3>其他专业服务</h3>
+                <ul>
+                    <li>驾照代考相关</li>
+                    <li>外币兑换代办</li>
+                    <li>税务申报服务</li>
+                    <li>留学/学历相关</li>
+                    <li>律师代办、代购等</li>
+                </ul>
+                <div class="service-price">起步价 <strong>¥30</strong></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Why Us ===== -->
+<section id="why-us">
+    <div class="container text-center">
+        <div class="section-label">Why Us</div>
+        <h2 class="section-title">为什么选择我们</h2>
+        <p class="section-subtitle mx-auto">用心服务，值得信赖</p>
+    </div>
+    <div class="container">
+        <div class="features-grid">
+            <div class="feature-card reveal-left">
+                <div class="feature-icon">⚡</div>
+                <h4>快速高效</h4>
+                <p>平均30分钟响应，快速处理，让您省时间</p>
+            </div>
+            <div class="feature-card reveal-left">
+                <div class="feature-icon">💰</div>
+                <h4>价格透明</h4>
+                <p>无隐性收费，价格公开，支持多种支付</p>
+            </div>
+            <div class="feature-card reveal-left">
+                <div class="feature-icon">🛡️</div>
+                <h4>安全可靠</h4>
+                <p>严格保护隐私，真实认证，信息加密</p>
+            </div>
+            <div class="feature-card reveal-left">
+                <div class="feature-icon">👨‍💼</div>
+                <h4>专业团队</h4>
+                <p>经验丰富的代办专家，各类服务专人负责</p>
+            </div>
+            <div class="feature-card reveal-left">
+                <div class="feature-icon">📱</div>
+                <h4>随时沟通</h4>
+                <p>微信实时沟通，全程透明跟进，随时反馈</p>
+            </div>
+            <div class="feature-card reveal-left">
+                <div class="feature-icon">⭐</div>
+                <h4>用户优先</h4>
+                <p>客户满意度第一，坚持做好每一个订单</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Process ===== -->
+<section id="process">
+    <div class="container text-center">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">服务流程</h2>
+        <p class="section-subtitle mx-auto">三步享受专业服务</p>
+    </div>
+    <div class="container">
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step-num">1</div>
+                <h4>📝 在线咨询</h4>
+                <p>微信描述需求，获得专业建议和报价</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-num">2</div>
+                <h4>✅ 确认订单</h4>
+                <p>确认费用和时间，支付定金即可开始处理</p>
+            </div>
+            <div class="step reveal">
+                <div class="step-num">3</div>
+                <h4>🎯 完成交付</h4>
+                <p>任务完成后上门交付，支付尾款结算</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== Testimonials ===== -->
+<section id="testimonials">
+    <div class="container text-center">
+        <div class="section-label">Testimonials</div>
+        <h2 class="section-title">客户评价</h2>
+        <p class="section-subtitle mx-auto">来自真实客户的反馈</p>
+    </div>
+    <div class="container">
+        <div class="testimonials-grid">
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"办事效率很高，帮我去人社局调档案，不到半天就搞定了，省了我跑一趟的功夫。"</p>
+                <div class="testimonial-author">张先生 <span class="testimonial-tag">档案调取</span></div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"陪老人去医院看病，全程都帮我排队拿药，非常有耐心。下次还找你们！"</p>
+                <div class="testimonial-author">李女士 <span class="testimonial-tag">陪诊服务</span></div>
+            </div>
+            <div class="testimonial-card reveal">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"代取快递送到家里，价格合理，态度也很好。在南阳需要跑腿就找这家。"</p>
+                <div class="testimonial-author">王小姐 <span class="testimonial-tag">生活代办</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+    <div class="container text-center">
+        <div class="section-label">FAQ</div>
+        <h2 class="section-title">常见问题</h2>
+        <p class="section-subtitle mx-auto">您最关心的问题都在这里</p>
+    </div>
+    <div class="container">
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <span>服务范围是多少？</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-a">我们主要服务南阳市区及周边地区。大部分服务可在南阳全市范围内完成。如需特殊地点，欢迎咨询客服。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <span>如何保证信息安全？</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-a">我们采取严格的信息保护措施，所有客户信息都加密存储。服务人员签署保密协议，坚决不向第三方泄露任何隐私。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <span>服务不满意怎么办？</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-a">我们承诺100%满意。如有不满意，联系客服，48小时内处理，确保问题圆满解决。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <span>支持哪些支付方式？</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-a">支持微信支付、支付宝、银行转账等多种方式。大多数订单需先支付定金，完成后支付尾款。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <span>可以加急处理吗？</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-a">可以。告诉客服您需要加急，我们会尽力为您安排。具体费用请咨询客服。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-q" onclick="toggleFaq(this)">
+                    <span>怎样预约服务？</span>
+                    <span class="faq-toggle">▼</span>
+                </div>
+                <div class="faq-a">最简单的方式是添加微信，告诉客服您的需求。客服会在您方便的时间处理。支持提前预约和紧急临时服务。</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta">
+    <div class="container">
+        <h2 class="reveal">立即开始</h2>
+        <p class="reveal">一条微信消息，生活变简单</p>
+        <div class="reveal">
+            <button class="btn btn-primary" onclick="openModal()" style="font-size:1.05rem;padding:1rem 2.5rem">
+                💬 联系我们
+            </button>
+        </div>
+        <p style="margin-top:1.5rem;opacity:.6;font-size:.85rem">
+            工作时间：8:00 - 22:00 ｜ 周末照常服务 ｜ 紧急订单随时响应
+        </p>
+    </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-col">
+            <h5>🏃 南阳跑腿</h5>
+            <p>您身边的专业生活服务助手</p>
+            <p>快速 · 专业 · 诚信</p>
+        </div>
+        <div class="footer-col">
+            <h5>服务时间</h5>
+            <p>周一至周日 8:00 - 22:00</p>
+            <p>紧急订单随时响应</p>
+        </div>
+        <div class="footer-col">
+            <h5>联系方式</h5>
+            <p>📱 微信: dada147258dd</p>
+            <p>☎️ 电话: 18606755302</p>
+            <p>📍 南阳市及周边</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        © 2024 南阳跑腿 · 24小时客服在线
+    </div>
+</footer>
+
+<!-- ===== Contact Modal ===== -->
+<div id="contactModal" class="modal">
+    <div class="modal-panel">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <div class="modal-icon">💬</div>
+        <h3>联系我们</h3>
+        <p class="modal-desc">添加微信或拨打电话，我们随时为您服务</p>
+        <div class="modal-contact">
+            <div class="modal-contact-item">
+                <span class="modal-contact-label">微信</span>
+                <span class="modal-contact-value">dada147258dd</span>
+                <button class="modal-copy-btn" onclick="copyText('dada147258dd', this)">复制</button>
+            </div>
+            <div class="modal-contact-item">
+                <span class="modal-contact-label">电话</span>
+                <span class="modal-contact-value">18606755302</span>
+                <button class="modal-copy-btn" onclick="copyText('18606755302', this)">复制</button>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <a href="tel:18606755302" class="btn btn-primary">📞 拨打电话</a>
+            <button class="btn btn-outline" onclick="closeModal()">稍后联系</button>
+        </div>
+    </div>
+</div>
+
+<!-- ===== Floating WhatsApp-style Button ===== -->
+<button class="float-wx" onclick="openModal()" aria-label="联系我们">
+    💬
+    <span class="float-wx-tooltip">联系跑腿</span>
+</button>
+
+<!-- ===== Back to Top ===== -->
+<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast">已复制到剪贴板</div>
+
+<script>
+    // ===== Modal =====
+    const modal=document.getElementById('contactModal');
+    function openModal(){modal.classList.add('show');document.body.style.overflow='hidden'}
+    function closeModal(){modal.classList.remove('show');document.body.style.overflow=''}
+    modal.addEventListener('click',function(e){if(e.target===this)closeModal()})
+
+    // ===== Copy to Clipboard =====
+    function copyText(text,btn){
+        navigator.clipboard.writeText(text).then(()=>{
+            const t=document.getElementById('toast');
+            t.textContent='✅ 已复制：'+text;
+            t.classList.add('show');
+            setTimeout(()=>t.classList.remove('show'),2000);
+            btn.textContent='已复制';
+            setTimeout(()=>btn.textContent='复制',1500);
+        })
+    }
+
+    // ===== FAQ Toggle =====
+    function toggleFaq(el){
+        const item=el.parentElement;
+        item.classList.toggle('open')
+    }
+
+    // ===== Scroll Animation (Intersection Observer) =====
+    const observer=new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target)
             }
-        });
-        
-        // FAQ 展开/折叠
-        function toggleFaq(element) {
-            const item = element.parentElement;
-            item.classList.toggle('active');
-        }
-    </script>
+        })
+    },{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el))
+
+    // ===== Header Scroll Effect =====
+    let lastScroll=0;
+    window.addEventListener('scroll',()=>{
+        const header=document.getElementById('header');
+        const backTop=document.querySelector('.back-top');
+        const scrollY=window.scrollY;
+
+        header.classList.toggle('scrolled',scrollY>50);
+        backTop.classList.toggle('show',scrollY>500);
+        lastScroll=scrollY
+    },{passive:true})
+
+    // ===== Smooth anchor scroll offset for fixed header =====
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click',e=>{
+            e.preventDefault();
+            const target=document.querySelector(a.getAttribute('href'));
+            if(target){
+                const offset=70;
+                window.scrollTo({top:target.offsetTop-offset,behavior:'smooth'})
+            }
+        })
+    })
+</script>
 </body>
 </html>
