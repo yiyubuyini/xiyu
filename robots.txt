@@ -1,6 +1,19 @@
 User-agent: *
 Allow: /
-Sitemap: https://xn--6kr078hlzhini.icu/sitemap.xml
+
+# 百度蜘蛛
+User-agent: Baiduspider
+Allow: /
+
+# Google蜘蛛
+User-agent: Googlebot
+Allow: /
+
+# 必应蜘蛛
+User-agent: bingbot
+Allow: /
 
 # 禁止爬取非必要内容
 Disallow: /cdn-cgi/
+
+Sitemap: https://xn--6kr078hlzhini.icu/sitemap.xml
