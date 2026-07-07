@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta http-equiv="Cache-Control" content="no-transform">
 
     <!-- ===== Primary Meta ===== -->
     <title>南阳跑腿服务案例 - 真实客户评价 | 南阳跑腿</title>
@@ -29,6 +31,9 @@
 
     <!-- ===== Preconnect for Speed ===== -->
     <link rel="dns-prefetch" href="https://nyptbb.cn">
+
+    <!-- ===== Favicon ===== -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
 
     <!-- ===== Structured Data: BreadcrumbList ===== -->
     <script type="application/ld+json">
@@ -407,6 +412,19 @@
         .back-top.show{opacity:1;pointer-events:auto}
         .back-top:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
 
+        /* ===== Mobile Action Bar ===== */
+        .action-bar{
+            display:none;position:fixed;bottom:0;left:0;right:0;z-index:998;
+            background:#fff;border-top:1px solid var(--border);
+            box-shadow:0 -4px 16px rgba(0,0,0,.08)
+        }
+        .action-bar a,.action-bar button{
+            flex:1;padding:.9rem 0;text-align:center;font-size:.95rem;font-weight:600;
+            border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4rem
+        }
+        .action-bar .action-call{background:#fff;color:var(--dark)}
+        .action-bar .action-wx{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff}
+
         /* ===== Toast ===== */
         .toast{
             position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);
@@ -433,14 +451,26 @@
             .cases-grid{grid-template-columns:1fr}
             .case-card{padding:1.5rem}
             .footer-grid{grid-template-columns:1fr 1fr}
-            .float-wx{width:50px;height:50px;font-size:1.4rem;bottom:1rem;right:1rem}
-            .back-top{width:38px;height:38px;font-size:1rem;bottom:1rem;left:1rem}
+            .float-wx{display:none}
+            .back-top{width:38px;height:38px;font-size:1rem;bottom:4.2rem;left:1rem}
+            .action-bar{display:flex}
+            body{padding-bottom:50px}
         }
         @media(max-width:480px){
             .hero h1{font-size:2rem}
             .footer-grid{grid-template-columns:1fr}
         }
     </style>
+    <!-- ===== 百度统计 ===== -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?52db730f9e5dfe05d2a1e4ff3575753a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
 </head>
 <body>
 
@@ -826,7 +856,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        © 2024 南阳跑腿 · 24小时客服在线
+        © 2026 南阳跑腿 · 24小时客服在线
     </div>
 </footer>
 
@@ -837,6 +867,7 @@
         <div class="modal-icon">💬</div>
         <h3>联系我们</h3>
         <p class="modal-desc">添加微信或拨打电话，我们随时为您服务</p>
+        <img src="images/wechat-qr.png" alt="微信二维码" style="width:180px;height:180px;border-radius:.6rem;margin:0 auto 1rem;display:block;border:1px solid var(--border)" onerror="this.style.display='none'">
         <div class="modal-contact">
             <div class="modal-contact-item">
                 <span class="modal-contact-label">微信</span>
@@ -857,6 +888,12 @@
 </div>
 
 <!-- ===== Floating Button ===== -->
+<!-- ===== Mobile Action Bar ===== -->
+<div class="action-bar">
+    <a href="tel:18606755302" class="action-call">📞 打电话</a>
+    <button class="action-wx" onclick="openModal()">💬 微信咨询</button>
+</div>
+
 <button class="float-wx" onclick="openModal()" aria-label="联系我们">
     💬
     <span class="float-wx-tooltip">联系跑腿</span>

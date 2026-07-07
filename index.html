@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="applicable-device" content="pc,mobile">
+    <meta http-equiv="Cache-Control" content="no-transform">
 
     <!-- ===== Primary Meta ===== -->
     <title>南阳跑腿 - 专业同城代办·跑腿服务 | 南阳本地生活助手</title>
     <meta name="description" content="南阳跑腿提供南阳本地政务档案代办、医院陪诊挂号、生活代办、同城配送等专业跑腿服务。30分钟快速响应，价格透明，值得信赖。联系电话：18606755302">
-    <meta name="keywords" content="南阳跑腿,南阳代办,南阳同城配送,南阳陪诊,南阳档案调取,南阳生活代办,南阳市政服务代办,跑腿服务,同城快送">
+    <meta name="keywords" content="南阳跑腿,南阳代办,南阳同城配送,南阳陪诊,南阳档案调取,南阳生活代办,南阳市政服务代办,跑腿服务,同城快送,邓州跑腿,唐河跑腿,南阳代挂号,南阳代排队">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://nyptbb.cn/">
 
@@ -30,6 +32,9 @@
     <!-- ===== Preconnect for Speed ===== -->
     <link rel="dns-prefetch" href="https://nyptbb.cn">
 
+    <!-- ===== Favicon ===== -->
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
     <!-- ===== Structured Data: LocalBusiness ===== -->
     <script type="application/ld+json">
     {
@@ -39,8 +44,6 @@
         "description": "南阳本地专业跑腿代办服务，提供政务档案、医疗健康、生活代办、同城配送等一站式服务。",
         "url": "https://nyptbb.cn/",
         "telephone": "18606755302",
-        "email": "",
-        "image": "",
         "priceRange": "¥20-¥200",
         "areaServed": {
             "@type": "City",
@@ -110,6 +113,64 @@
     }
     </script>
 
+    <!-- ===== Structured Data: FAQPage ===== -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "服务范围是多少？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "我们主要服务南阳市区及周边地区。大部分服务可在南阳全市范围内完成。如需特殊地点，欢迎咨询客服。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "如何保证信息安全？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "我们采取严格的信息保护措施，所有客户信息都加密存储。服务人员签署保密协议，坚决不向第三方泄露任何隐私。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "服务不满意怎么办？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "我们承诺100%满意。如有不满意，联系客服，48小时内处理，确保问题圆满解决。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "支持哪些支付方式？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "支持微信支付、支付宝、银行转账等多种方式。大多数订单需先支付定金，完成后支付尾款。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "可以加急处理吗？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "可以。告诉客服您需要加急，我们会尽力为您安排。具体费用请咨询客服。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "怎样预约服务？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "最简单的方式是添加微信，告诉客服您的需求。客服会在您方便的时间处理。支持提前预约和紧急临时服务。"
+                }
+            }
+        ]
+    }
+    </script>
+
     <style>
         /* ===== Reset & Base ===== */
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
@@ -164,6 +225,9 @@
             transition:transform .3s,box-shadow .3s
         }
         .contact-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(249,115,22,.35)}
+
+        /* ===== Mobile Nav Toggle ===== */
+        .nav-toggle{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;padding:.3rem}
 
         /* ===== Hero ===== */
         .hero{
@@ -479,9 +543,29 @@
         .back-top.show{opacity:1;pointer-events:auto}
         .back-top:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
 
+        /* ===== Mobile Action Bar ===== */
+        .action-bar{
+            display:none;position:fixed;bottom:0;left:0;right:0;z-index:998;
+            background:#fff;border-top:1px solid var(--border);
+            box-shadow:0 -4px 16px rgba(0,0,0,.08)
+        }
+        .action-bar a,.action-bar button{
+            flex:1;padding:.9rem 0;text-align:center;font-size:.95rem;font-weight:600;
+            border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4rem
+        }
+        .action-bar .action-call{background:#fff;color:var(--dark)}
+        .action-bar .action-wx{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff}
+
         /* ===== Mobile ===== */
         @media(max-width:768px){
             .nav-links{display:none}
+            .nav-toggle{display:block}
+            .nav-links.open{
+                display:flex;flex-direction:column;
+                position:absolute;top:100%;left:0;right:0;
+                background:#fff;padding:1rem 1.5rem;gap:1rem;
+                border-bottom:1px solid var(--border);box-shadow:var(--shadow)
+            }
             .hero{padding:5rem 1rem 3rem}
             .hero-stats{gap:1.5rem}
             .hero-stat-num{font-size:1.3rem}
@@ -489,8 +573,10 @@
             .services-grid,.features-grid,.testimonials-grid{gap:1rem}
             .service-card,.feature-card{padding:1.5rem}
             .footer-grid{grid-template-columns:1fr 1fr}
-            .float-wx{width:50px;height:50px;font-size:1.4rem;bottom:1rem;right:1rem}
-            .back-top{width:38px;height:38px;font-size:1rem;bottom:1rem;left:1rem}
+            .float-wx{display:none}
+            .back-top{width:38px;height:38px;font-size:1rem;bottom:4.2rem;left:1rem}
+            .action-bar{display:flex}
+            body{padding-bottom:50px}
         }
         @media(max-width:480px){
             .hero-actions{flex-direction:column;align-items:stretch}
@@ -507,6 +593,16 @@
         }
         .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
     </style>
+    <!-- ===== 百度统计 ===== -->
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?52db730f9e5dfe05d2a1e4ff3575753a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
 </head>
 <body>
 
@@ -514,6 +610,7 @@
 <header id="header">
     <div class="header-inner">
         <div class="logo">🏃 <span>南阳跑腿</span></div>
+        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="菜单">☰</button>
         <nav class="nav-links">
             <a href="index.html">首页</a>
             <a href="zhengwu.html">政务代办</a>
@@ -533,11 +630,11 @@
     <div class="hero-content">
         <div class="hero-badge">📍 南阳本地 · 专业跑腿服务</div>
         <h1>
-            生活琐事<br>
-            <span class="highlight">我来跑腿</span>
+            南阳跑腿<br>
+            <span class="highlight">同城代办 · 生活服务</span>
         </h1>
         <p>
-            档案调取 · 医疗挂号 · 生活代办 · 同城配送<br>
+            生活琐事我来跑腿 · 档案调取 · 医疗挂号 · 生活代办 · 同城配送<br>
             专业、快速、诚信的一站式服务
         </p>
         <div class="hero-actions">
@@ -744,6 +841,87 @@
     </div>
 </section>
 
+<!-- ===== Service Areas ===== -->
+<section id="areas" style="background:#fff">
+    <div class="container text-center">
+        <div class="section-label">Service Areas</div>
+        <h2 class="section-title">服务区域</h2>
+        <p class="section-subtitle mx-auto">南阳市区 30 分钟响应，各县区均可代办，人在外地也能委托我们在南阳办事</p>
+    </div>
+    <div class="container">
+        <div class="features-grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏙️</div>
+                <h4>宛城区跑腿</h4>
+                <p>市中心全域覆盖</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏙️</div>
+                <h4>卧龙区跑腿</h4>
+                <p>市中心全域覆盖</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏘️</div>
+                <h4>邓州市代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏘️</div>
+                <h4>唐河县代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏘️</div>
+                <h4>新野县代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏘️</div>
+                <h4>方城县代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏘️</div>
+                <h4>社旗县代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏘️</div>
+                <h4>镇平县代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏘️</div>
+                <h4>内乡县代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏔️</div>
+                <h4>西峡县代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏘️</div>
+                <h4>淅川县代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏔️</div>
+                <h4>桐柏县代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+            <div class="feature-card reveal" style="text-align:center;padding:1.2rem">
+                <div class="feature-icon">🏔️</div>
+                <h4>南召县代办</h4>
+                <p>政务、生活代办</p>
+            </div>
+        </div>
+        <p style="text-align:center;margin-top:2rem;color:var(--gray);font-size:.9rem">
+            身在北京、上海、广州、深圳等外地城市？微信委托，我们帮您在南阳本地办理，全程实时反馈。
+        </p>
+    </div>
+</section>
+
 <!-- ===== CTA ===== -->
 <section class="cta">
     <div class="container">
@@ -830,7 +1008,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        © 2024 南阳跑腿 · 24小时客服在线
+        © 2026 南阳跑腿 · 24小时客服在线
     </div>
 </footer>
 
@@ -841,6 +1019,7 @@
         <div class="modal-icon">💬</div>
         <h3>联系我们</h3>
         <p class="modal-desc">添加微信或拨打电话，我们随时为您服务</p>
+        <img src="images/wechat-qr.png" alt="微信二维码" style="width:180px;height:180px;border-radius:.6rem;margin:0 auto 1rem;display:block;border:1px solid var(--border)" onerror="this.style.display='none'">
         <div class="modal-contact">
             <div class="modal-contact-item">
                 <span class="modal-contact-label">微信</span>
@@ -860,7 +1039,13 @@
     </div>
 </div>
 
-<!-- ===== Floating WhatsApp-style Button ===== -->
+<!-- ===== Mobile Action Bar ===== -->
+<div class="action-bar">
+    <a href="tel:18606755302" class="action-call">📞 打电话</a>
+    <button class="action-wx" onclick="openModal()">💬 微信咨询</button>
+</div>
+
+<!-- ===== Floating Contact Button ===== -->
 <button class="float-wx" onclick="openModal()" aria-label="联系我们">
     💬
     <span class="float-wx-tooltip">联系跑腿</span>
@@ -925,6 +1110,7 @@
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
         a.addEventListener('click',e=>{
             e.preventDefault();
+            document.querySelector('.nav-links').classList.remove('open');
             const target=document.querySelector(a.getAttribute('href'));
             if(target){
                 const offset=70;
