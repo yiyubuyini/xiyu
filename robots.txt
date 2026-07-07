@@ -16,4 +16,4 @@ Allow: /
 # 禁止爬取非必要内容
 Disallow: /cdn-cgi/
 
-Sitemap: https://xn--6kr078hlzhini.icu/sitemap.xml
+Sitemap: https://nyptbb.cn/sitemap.xml
