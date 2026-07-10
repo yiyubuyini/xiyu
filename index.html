@@ -171,439 +171,11 @@
         ]
     }
     </script>
-
-    <style>
-        /* ===== Reset & Base ===== */
-        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        html{scroll-behavior:smooth}
-        body{
-            font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;
-            color:#1a1a2e;background:#fafafa;line-height:1.7;overflow-x:hidden
-        }
-        a{text-decoration:none;color:inherit}
-        .container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
-
-        /* ===== Brand Colors ===== */
-        :root{
-            --primary:#f97316;--primary-dark:#ea580c;--primary-light:#fff7ed;
-            --dark:#1a1a2e;--gray:#64748b;--light:#f8fafc;--border:#e2e8f0;
-            --shadow:0 4px 24px rgba(0,0,0,.06);--radius:.75rem
-        }
-
-        /* ===== Scroll Animation ===== */
-        .reveal{opacity:0;transform:translateY(40px);transition:all .7s cubic-bezier(.16,1,.3,1)}
-        .reveal.visible{opacity:1;transform:translateY(0)}
-        .reveal-left{opacity:0;transform:translateX(-40px);transition:all .7s cubic-bezier(.16,1,.3,1)}
-        .reveal-left.visible{opacity:1;transform:translateX(0)}
-        .reveal-right{opacity:0;transform:translateX(40px);transition:all .7s cubic-bezier(.16,1,.3,1)}
-        .reveal-right.visible{opacity:1;transform:translateX(0)}
-
-        /* ===== Header ===== */
-        header{
-            position:fixed;top:0;left:0;right:0;z-index:1000;
-            background:rgba(255,255,255,.85);backdrop-filter:blur(16px);
-            border-bottom:1px solid var(--border);transition:all .3s;
-        }
-        header.scrolled{box-shadow:var(--shadow)}
-        .header-inner{
-            max-width:1100px;margin:0 auto;padding:.85rem 1.5rem;
-            display:flex;align-items:center;justify-content:space-between
-        }
-        .logo{
-            font-size:1.35rem;font-weight:800;
-            background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-            background-clip:text;letter-spacing:-.5px
-        }
-        .logo span{-webkit-text-fill-color:var(--dark)}
-        .nav-links{display:flex;gap:2rem;align-items:center}
-        .nav-links a{font-size:.9rem;color:var(--gray);transition:color .3s;font-weight:500}
-        .nav-links a:hover{color:var(--primary)}
-        .contact-btn{
-            background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-            color:#fff;border:none;padding:.55rem 1.3rem;border-radius:2rem;
-            font-size:.85rem;font-weight:600;cursor:pointer;
-            transition:transform .3s,box-shadow .3s
-        }
-        .contact-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(249,115,22,.35)}
-
-        /* ===== Mobile Nav Toggle ===== */
-        .nav-toggle{display:none;background:none;border:none;font-size:1.4rem;cursor:pointer;padding:.3rem}
-
-        /* ===== Hero ===== */
-        .hero{
-            min-height:100vh;display:flex;align-items:center;justify-content:center;
-            background:linear-gradient(135deg,#fff7ed 0%,#ffedd5 40%,#fef3c7 100%);
-            position:relative;overflow:hidden;padding:6rem 1.5rem 4rem
-        }
-        .hero::before{
-            content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;
-            background:radial-gradient(circle,rgba(249,115,22,.08) 0%,transparent 70%);
-            border-radius:50%;pointer-events:none
-        }
-        .hero::after{
-            content:'';position:absolute;bottom:-30%;left:-10%;width:400px;height:400px;
-            background:radial-gradient(circle,rgba(251,146,60,.06) 0%,transparent 70%);
-            border-radius:50%;pointer-events:none
-        }
-        .hero-content{position:relative;z-index:1;text-align:center;max-width:700px}
-        .hero-badge{
-            display:inline-block;padding:.35rem 1rem;border-radius:2rem;
-            background:rgba(249,115,22,.1);color:var(--primary-dark);
-            font-size:.8rem;font-weight:600;margin-bottom:1.5rem;
-            border:1px solid rgba(249,115,22,.15)
-        }
-        .hero h1{
-            font-size:clamp(2.5rem,5.5vw,4rem);font-weight:800;
-            line-height:1.15;margin-bottom:1.2rem;letter-spacing:-1px
-        }
-        .hero h1 .highlight{
-            background:linear-gradient(135deg,var(--primary),#f59e0b);
-            -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-            background-clip:text
-        }
-        .hero p{
-            font-size:clamp(1rem,1.8vw,1.15rem);color:var(--gray);
-            max-width:540px;margin:0 auto 2.2rem;line-height:1.8
-        }
-        .hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-        .btn{
-            padding:.9rem 2.2rem;border:none;border-radius:2rem;
-            font-size:.95rem;font-weight:600;cursor:pointer;
-            transition:all .3s;display:inline-flex;align-items:center;gap:.5rem
-        }
-        .btn-primary{
-            background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-            color:#fff;box-shadow:0 4px 16px rgba(249,115,22,.3)
-        }
-        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(249,115,22,.4)}
-        .btn-outline{
-            background:transparent;color:var(--dark);
-            border:2px solid var(--border)
-        }
-        .btn-outline:hover{background:var(--light);border-color:var(--primary);color:var(--primary)}
-        .hero-stats{
-            display:flex;gap:2.5rem;justify-content:center;margin-top:2.5rem;flex-wrap:wrap
-        }
-        .hero-stat{text-align:center}
-        .hero-stat-num{
-            font-size:1.8rem;font-weight:800;color:var(--dark);line-height:1
-        }
-        .hero-stat-label{font-size:.8rem;color:var(--gray);margin-top:.3rem}
-
-        /* ===== Section Common ===== */
-        section{padding:5rem 0}
-        .section-label{
-            display:inline-block;font-size:.8rem;font-weight:700;
-            text-transform:uppercase;letter-spacing:2px;color:var(--primary);
-            margin-bottom:.5rem
-        }
-        .section-title{
-            font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:800;
-            margin-bottom:.8rem;letter-spacing:-.5px
-        }
-        .section-subtitle{
-            color:var(--gray);font-size:1rem;max-width:600px;margin-bottom:3rem
-        }
-        .text-center{text-align:center}
-        .mx-auto{margin-left:auto;margin-right:auto}
-
-        /* ===== Services ===== */
-        #services{background:#fff}
-        .services-grid{
-            display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-            gap:1.5rem
-        }
-        .service-card{
-            background:#fff;border:1px solid var(--border);border-radius:var(--radius);
-            padding:2rem;transition:all .4s;position:relative;overflow:hidden
-        }
-        .service-card::before{
-            content:'';position:absolute;top:0;left:0;right:0;height:3px;
-            background:linear-gradient(90deg,var(--primary),#f59e0b);
-            transform:scaleX(0);transform-origin:left;transition:transform .4s
-        }
-        .service-card:hover{
-            border-color:var(--primary);transform:translateY(-6px);
-            box-shadow:0 12px 36px rgba(249,115,22,.1)
-        }
-        .service-card:hover::before{transform:scaleX(1)}
-        .service-icon{font-size:2.2rem;margin-bottom:1rem;display:inline-block}
-        .service-card h3{font-size:1.1rem;font-weight:700;margin-bottom:1rem}
-        .service-card ul{list-style:none}
-        .service-card li{
-            padding:.35rem 0 .35rem 1.4rem;color:var(--gray);font-size:.88rem;
-            position:relative
-        }
-        .service-card li::before{
-            content:"✓";position:absolute;left:0;color:var(--primary);font-weight:700
-        }
-        .service-price{
-            margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);
-            font-size:.85rem;color:var(--gray)
-        }
-        .service-price strong{color:var(--primary-dark);font-size:1.1rem}
-
-        /* ===== Why Us ===== */
-        #why-us{background:var(--primary-light)}
-        .features-grid{
-            display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-            gap:1.5rem
-        }
-        .feature-card{
-            background:#fff;border-radius:var(--radius);padding:2rem;
-            transition:all .4s;border:1px solid transparent
-        }
-        .feature-card:hover{
-            border-color:var(--border);transform:translateY(-4px);box-shadow:var(--shadow)
-        }
-        .feature-icon{font-size:2rem;margin-bottom:.8rem}
-        .feature-card h4{font-size:1rem;font-weight:700;margin-bottom:.5rem}
-        .feature-card p{font-size:.88rem;color:var(--gray);line-height:1.6}
-
-        /* ===== Process ===== */
-        #process{background:#fff}
-        .steps{
-            display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-            gap:2rem;position:relative
-        }
-        .steps::before{
-            content:'';position:absolute;top:2.5rem;left:15%;right:15%;
-            height:2px;background:linear-gradient(90deg,var(--primary),var(--border),transparent);
-            display:none
-        }
-        @media(min-width:768px){.steps::before{display:block}}
-        .step{text-align:center;position:relative}
-        .step-num{
-            width:56px;height:56px;line-height:56px;border-radius:50%;
-            background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-            color:#fff;font-size:1.3rem;font-weight:700;margin:0 auto 1.2rem;
-            position:relative;z-index:1;box-shadow:0 4px 16px rgba(249,115,22,.25)
-        }
-        .step h4{font-size:1rem;font-weight:700;margin-bottom:.5rem}
-        .step p{font-size:.88rem;color:var(--gray);max-width:280px;margin:0 auto}
-
-        /* ===== Testimonials ===== */
-        #testimonials{background:var(--light)}
-        .testimonials-grid{
-            display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-            gap:1.5rem
-        }
-        .testimonial-card{
-            background:#fff;border-radius:var(--radius);padding:1.8rem;
-            border:1px solid var(--border);transition:all .3s
-        }
-        .testimonial-card:hover{box-shadow:var(--shadow)}
-        .testimonial-stars{color:#f59e0b;font-size:.9rem;margin-bottom:.8rem}
-        .testimonial-text{
-            font-size:.9rem;color:var(--gray);line-height:1.7;margin-bottom:1rem;
-            font-style:italic
-        }
-        .testimonial-author{font-size:.85rem;font-weight:600;color:var(--dark)}
-        .testimonial-tag{
-            display:inline-block;font-size:.75rem;padding:.15rem .6rem;
-            border-radius:1rem;background:var(--primary-light);color:var(--primary-dark);
-            margin-left:.5rem;font-weight:500
-        }
-
-        /* ===== FAQ ===== */
-        #faq{background:var(--primary-light)}
-        .faq-list{max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:.6rem}
-        .faq-item{
-            background:#fff;border-radius:var(--radius);overflow:hidden;
-            border:1px solid var(--border);transition:all .3s
-        }
-        .faq-item:hover{border-color:rgba(249,115,22,.2)}
-        .faq-q{
-            padding:1.2rem 1.5rem;cursor:pointer;
-            display:flex;justify-content:space-between;align-items:center;
-            font-weight:600;font-size:.95rem;user-select:none;
-            transition:background .3s
-        }
-        .faq-q:hover{background:var(--light)}
-        .faq-toggle{
-            font-size:.8rem;color:var(--gray);transition:transform .3s;
-            flex-shrink:0;margin-left:1rem
-        }
-        .faq-item.open .faq-toggle{transform:rotate(180deg);color:var(--primary)}
-        .faq-a{
-            max-height:0;overflow:hidden;transition:all .4s cubic-bezier(.16,1,.3,1);
-            color:var(--gray);font-size:.9rem;line-height:1.7;
-            padding:0 1.5rem
-        }
-        .faq-item.open .faq-a{
-            max-height:400px;padding:0 1.5rem 1.3rem
-        }
-
-        /* ===== CTA ===== */
-        .cta{
-            background:linear-gradient(135deg,#1a1a2e 0%,#2d2d5e 100%);
-            color:#fff;text-align:center;padding:4.5rem 1.5rem;
-            position:relative;overflow:hidden
-        }
-        .cta::before{
-            content:'';position:absolute;top:0;left:0;right:0;bottom:0;
-            background:radial-gradient(circle at 30% 50%,rgba(249,115,22,.1) 0%,transparent 50%);
-            pointer-events:none
-        }
-        .cta .container{position:relative;z-index:1}
-        .cta h2{font-size:clamp(1.8rem,3vw,2.3rem);font-weight:800;margin-bottom:.5rem}
-        .cta p{opacity:.8;margin-bottom:2rem;font-size:1rem}
-        .cta .btn-primary{box-shadow:0 4px 20px rgba(249,115,22,.4)}
-        .cta .btn-primary:hover{box-shadow:0 8px 32px rgba(249,115,22,.5)}
-
-        /* ===== Footer ===== */
-        footer{
-            background:var(--dark);color:rgba(255,255,255,.7);
-            padding:3rem 1.5rem 2rem;font-size:.88rem
-        }
-        .footer-grid{
-            max-width:1100px;margin:0 auto;
-            display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-            gap:2rem;margin-bottom:2rem
-        }
-        .footer-col h5{color:#fff;font-size:.95rem;font-weight:700;margin-bottom:1rem}
-        .footer-col p,.footer-col a{display:block;color:rgba(255,255,255,.6);margin-bottom:.4rem;transition:color .3s}
-        .footer-col a:hover{color:var(--primary)}
-        .footer-bottom{
-            max-width:1100px;margin:0 auto;padding-top:1.5rem;
-            border-top:1px solid rgba(255,255,255,.08);
-            text-align:center;font-size:.82rem;color:rgba(255,255,255,.4)
-        }
-
-        /* ===== Modal ===== */
-        .modal{
-            display:none;position:fixed;z-index:9999;
-            left:0;top:0;width:100%;height:100%;
-            background:rgba(0,0,0,.5);backdrop-filter:blur(4px);
-            align-items:center;justify-content:center;
-            opacity:0;transition:opacity .3s
-        }
-        .modal.show{display:flex;opacity:1}
-        .modal-panel{
-            background:#fff;border-radius:1rem;padding:2.2rem;
-            width:92%;max-width:380px;text-align:center;
-            transform:scale(.9);transition:transform .3s cubic-bezier(.16,1,.3,1)
-        }
-        .modal.show .modal-panel{transform:scale(1)}
-        .modal-close{
-            float:right;background:none;border:none;font-size:1.5rem;
-            cursor:pointer;color:var(--gray);line-height:1;padding:.2rem
-        }
-        .modal-icon{font-size:2.5rem;margin-bottom:.8rem}
-        .modal h3{font-size:1.2rem;font-weight:700;margin-bottom:.4rem}
-        .modal .modal-desc{color:var(--gray);font-size:.88rem;margin-bottom:1.5rem}
-        .modal-contact{margin-bottom:1.2rem}
-        .modal-contact-item{
-            background:var(--light);border-radius:.6rem;padding:1rem;
-            margin-bottom:.6rem;display:flex;align-items:center;gap:.8rem
-        }
-        .modal-contact-label{
-            font-size:.75rem;color:var(--gray);font-weight:600;
-            background:var(--border);padding:.15rem .5rem;border-radius:.3rem;
-            flex-shrink:0
-        }
-        .modal-contact-value{font-weight:600;font-size:.95rem;color:var(--dark);word-break:break-all}
-        .modal-copy-btn{
-            margin-left:auto;background:none;border:1px solid var(--border);
-            border-radius:.4rem;padding:.3rem .5rem;font-size:.75rem;
-            cursor:pointer;color:var(--gray);transition:all .2s;
-            flex-shrink:0
-        }
-        .modal-copy-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
-        .modal-actions{display:flex;flex-direction:column;gap:.6rem}
-        .modal-actions .btn{width:100%;justify-content:center}
-
-        /* ===== Floating Contact ===== */
-        .float-wx{
-            position:fixed;bottom:1.5rem;right:1.5rem;z-index:999;
-            width:56px;height:56px;border-radius:50%;
-            background:linear-gradient(135deg,#25D366,#128C7E);
-            color:#fff;display:flex;align-items:center;justify-content:center;
-            font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,.35);
-            cursor:pointer;transition:all .3s;border:none
-        }
-        .float-wx:hover{transform:scale(1.1);box-shadow:0 8px 28px rgba(37,211,102,.45)}
-        .float-wx-tooltip{
-            position:absolute;right:66px;top:50%;transform:translateY(-50%);
-            background:#fff;color:var(--dark);font-size:.78rem;font-weight:600;
-            padding:.4rem .8rem;border-radius:.4rem;white-space:nowrap;
-            box-shadow:0 2px 12px rgba(0,0,0,.1);display:none
-        }
-        .float-wx:hover .float-wx-tooltip{display:block}
-
-        /* ===== Back to Top ===== */
-        .back-top{
-            position:fixed;bottom:1.5rem;left:1.5rem;z-index:999;
-            width:44px;height:44px;border-radius:50%;
-            background:#fff;color:var(--dark);border:1px solid var(--border);
-            display:flex;align-items:center;justify-content:center;
-            font-size:1.2rem;cursor:pointer;opacity:0;pointer-events:none;
-            transition:all .3s;box-shadow:var(--shadow)
-        }
-        .back-top.show{opacity:1;pointer-events:auto}
-        .back-top:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
-
-        /* ===== Mobile Action Bar ===== */
-        .action-bar{
-            display:none;position:fixed;bottom:0;left:0;right:0;z-index:998;
-            background:#fff;border-top:1px solid var(--border);
-            box-shadow:0 -4px 16px rgba(0,0,0,.08)
-        }
-        .action-bar a,.action-bar button{
-            flex:1;padding:.9rem 0;text-align:center;font-size:.95rem;font-weight:600;
-            border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.4rem
-        }
-        .action-bar .action-call{background:#fff;color:var(--dark)}
-        .action-bar .action-wx{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff}
-
-        /* ===== Mobile ===== */
-        @media(max-width:768px){
-            .nav-links{display:none}
-            .nav-toggle{display:block}
-            .nav-links.open{
-                display:flex;flex-direction:column;
-                position:absolute;top:100%;left:0;right:0;
-                background:#fff;padding:1rem 1.5rem;gap:1rem;
-                border-bottom:1px solid var(--border);box-shadow:var(--shadow)
-            }
-            .hero{padding:5rem 1rem 3rem}
-            .hero-stats{gap:1.5rem}
-            .hero-stat-num{font-size:1.3rem}
-            section{padding:3.5rem 0}
-            .services-grid,.features-grid,.testimonials-grid{gap:1rem}
-            .service-card,.feature-card{padding:1.5rem}
-            .footer-grid{grid-template-columns:1fr 1fr}
-            .float-wx{display:none}
-            .back-top{width:38px;height:38px;font-size:1rem;bottom:4.2rem;left:1rem}
-            .action-bar{display:flex}
-            body{padding-bottom:50px}
-        }
-        @media(max-width:480px){
-            .hero-actions{flex-direction:column;align-items:stretch}
-            .hero h1{font-size:2rem}
-            .footer-grid{grid-template-columns:1fr}
-        }
-
-        /* ===== Toast ===== */
-        .toast{
-            position:fixed;bottom:5rem;left:50%;transform:translateX(-50%) translateY(20px);
-            background:var(--dark);color:#fff;padding:.6rem 1.2rem;
-            border-radius:2rem;font-size:.82rem;opacity:0;
-            transition:all .4s;z-index:99999;pointer-events:none
-        }
-        .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-    </style>
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
     <!-- ===== 百度统计 ===== -->
-    <script>
-    var _hmt = _hmt || [];
-    (function() {
-      var hm = document.createElement("script");
-      hm.src = "https://hm.baidu.com/hm.js?52db730f9e5dfe05d2a1e4ff3575753a";
-      var s = document.getElementsByTagName("script")[0];
-      s.parentNode.insertBefore(hm, s);
-    })();
-    </script>
+    <script src="assets/js/common.js" defer></script>
 </head>
 <body>
 
@@ -614,8 +186,8 @@
 <header id="header">
     <div class="header-inner">
         <div class="logo">🏃 <span>南阳跑腿</span></div>
-        <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="菜单">☰</button>
-        <nav class="nav-links">
+        <button class="nav-toggle" type="button" data-nav-toggle aria-label="菜单" aria-expanded="false" aria-controls="primary-navigation">☰</button>
+        <nav class="nav-links" id="primary-navigation">
             <a href="index.html">首页</a>
             <a href="zhengwu.html">政务代办</a>
             <a href="yiliao.html">医疗陪诊</a>
@@ -624,7 +196,7 @@
             <a href="anli.html">服务案例</a>
             <a href="wenti.html">常见问题</a>
             <a href="guanyu.html">关于我们</a>
-            <button class="contact-btn" onclick="openModal()">微信联系</button>
+            <button type="button" class="contact-btn" data-contact-open>微信联系</button>
         </nav>
     </div>
 </header>
@@ -642,7 +214,7 @@
             专业、快速、诚信的一站式服务
         </p>
         <div class="hero-actions">
-            <button class="btn btn-primary" onclick="openModal()">💬 立即咨询</button>
+            <button type="button" class="btn btn-primary" data-contact-open>💬 立即咨询</button>
             <a href="#services" class="btn btn-outline">📋 查看服务</a>
         </div>
         <div class="hero-stats">
@@ -800,42 +372,42 @@
     <div class="container">
         <div class="faq-list">
             <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(this)">
+                <div class="faq-q" data-faq-toggle role="button" tabindex="0">
                     <span>服务范围是多少？</span>
                     <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-a">我们主要服务南阳市区及周边地区。大部分服务可在南阳全市范围内完成。如需特殊地点，欢迎咨询客服。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(this)">
+                <div class="faq-q" data-faq-toggle role="button" tabindex="0">
                     <span>如何保证信息安全？</span>
                     <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-a">我们采取严格的信息保护措施，所有客户信息都加密存储。服务人员签署保密协议，坚决不向第三方泄露任何隐私。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(this)">
+                <div class="faq-q" data-faq-toggle role="button" tabindex="0">
                     <span>服务不满意怎么办？</span>
                     <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-a">我们承诺100%满意。如有不满意，联系客服，48小时内处理，确保问题圆满解决。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(this)">
+                <div class="faq-q" data-faq-toggle role="button" tabindex="0">
                     <span>支持哪些支付方式？</span>
                     <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-a">支持微信支付、支付宝、银行转账等多种方式。大多数订单需先支付定金，完成后支付尾款。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(this)">
+                <div class="faq-q" data-faq-toggle role="button" tabindex="0">
                     <span>可以加急处理吗？</span>
                     <span class="faq-toggle">▼</span>
                 </div>
                 <div class="faq-a">可以。告诉客服您需要加急，我们会尽力为您安排。具体费用请咨询客服。</div>
             </div>
             <div class="faq-item">
-                <div class="faq-q" onclick="toggleFaq(this)">
+                <div class="faq-q" data-faq-toggle role="button" tabindex="0">
                     <span>怎样预约服务？</span>
                     <span class="faq-toggle">▼</span>
                 </div>
@@ -932,7 +504,7 @@
         <h2 class="reveal">立即开始</h2>
         <p class="reveal">一条微信消息，生活变简单</p>
         <div class="reveal">
-            <button class="btn btn-primary" onclick="openModal()" style="font-size:1.05rem;padding:1rem 2.5rem">
+            <button type="button" class="btn btn-primary" data-contact-open style="font-size:1.05rem;padding:1rem 2.5rem">
                 💬 联系我们
             </button>
         </div>
@@ -1012,33 +584,33 @@
         </div>
     </div>
     <div class="footer-bottom">
-        © 2026 南阳跑腿 · 24小时客服在线
+        © 2026 南阳跑腿 · 每日 8:00–22:00 客服在线
     </div>
 </footer>
 
 <!-- ===== Contact Modal ===== -->
-<div id="contactModal" class="modal">
-    <div class="modal-panel">
-        <button class="modal-close" onclick="closeModal()">✕</button>
+<div id="contactModal" class="modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle" aria-describedby="contactModalDesc" tabindex="-1">
+        <button class="modal-close" type="button" data-contact-close aria-label="关闭联系窗口">✕</button>
         <div class="modal-icon">💬</div>
-        <h3>联系我们</h3>
-        <p class="modal-desc">添加微信或拨打电话，我们随时为您服务</p>
+        <h3 id="contactModalTitle">联系我们</h3>
+        <p class="modal-desc" id="contactModalDesc">添加微信或拨打电话，我们随时为您服务</p>
         <img src="images/wechat-qr.png" alt="微信二维码" style="width:180px;height:180px;border-radius:.6rem;margin:0 auto 1rem;display:block;border:1px solid var(--border)" onerror="this.style.display='none'">
         <div class="modal-contact">
             <div class="modal-contact-item">
                 <span class="modal-contact-label">微信</span>
                 <span class="modal-contact-value">dada147258dd</span>
-                <button class="modal-copy-btn" onclick="copyText('dada147258dd', this)">复制</button>
+                <button type="button" class="modal-copy-btn" data-copy="dada147258dd">复制</button>
             </div>
             <div class="modal-contact-item">
                 <span class="modal-contact-label">电话</span>
                 <span class="modal-contact-value">18606755302</span>
-                <button class="modal-copy-btn" onclick="copyText('18606755302', this)">复制</button>
+                <button type="button" class="modal-copy-btn" data-copy="18606755302">复制</button>
             </div>
         </div>
         <div class="modal-actions">
             <a href="tel:18606755302" class="btn btn-primary">📞 拨打电话</a>
-            <button class="btn btn-outline" onclick="closeModal()">稍后联系</button>
+            <button type="button" class="btn btn-outline" data-contact-close>稍后联系</button>
         </div>
     </div>
 </div>
@@ -1046,82 +618,19 @@
 <!-- ===== Mobile Action Bar ===== -->
 <div class="action-bar">
     <a href="tel:18606755302" class="action-call">📞 打电话</a>
-    <button class="action-wx" onclick="openModal()">💬 微信咨询</button>
+    <button type="button" class="action-wx" data-contact-open>💬 微信咨询</button>
 </div>
 
 <!-- ===== Floating Contact Button ===== -->
-<button class="float-wx" onclick="openModal()" aria-label="联系我们">
+<button type="button" class="float-wx" data-contact-open aria-label="联系我们">
     💬
     <span class="float-wx-tooltip">联系跑腿</span>
 </button>
 
 <!-- ===== Back to Top ===== -->
-<button class="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="回到顶部">↑</button>
+<button type="button" class="back-top" data-back-top aria-label="回到顶部">↑</button>
 
 <!-- ===== Toast ===== -->
-<div class="toast" id="toast">已复制到剪贴板</div>
-
-<script>
-    // ===== Modal =====
-    const modal=document.getElementById('contactModal');
-    function openModal(){modal.classList.add('show');document.body.style.overflow='hidden'}
-    function closeModal(){modal.classList.remove('show');document.body.style.overflow=''}
-    modal.addEventListener('click',function(e){if(e.target===this)closeModal()})
-
-    // ===== Copy to Clipboard =====
-    function copyText(text,btn){
-        navigator.clipboard.writeText(text).then(()=>{
-            const t=document.getElementById('toast');
-            t.textContent='✅ 已复制：'+text;
-            t.classList.add('show');
-            setTimeout(()=>t.classList.remove('show'),2000);
-            btn.textContent='已复制';
-            setTimeout(()=>btn.textContent='复制',1500);
-        })
-    }
-
-    // ===== FAQ Toggle =====
-    function toggleFaq(el){
-        const item=el.parentElement;
-        item.classList.toggle('open')
-    }
-
-    // ===== Scroll Animation (Intersection Observer) =====
-    const observer=new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-            if(entry.isIntersecting){
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target)
-            }
-        })
-    },{threshold:.1,rootMargin:'0px 0px -50px 0px'});
-
-    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(el=>observer.observe(el))
-
-    // ===== Header Scroll Effect =====
-    let lastScroll=0;
-    window.addEventListener('scroll',()=>{
-        const header=document.getElementById('header');
-        const backTop=document.querySelector('.back-top');
-        const scrollY=window.scrollY;
-
-        header.classList.toggle('scrolled',scrollY>50);
-        backTop.classList.toggle('show',scrollY>500);
-        lastScroll=scrollY
-    },{passive:true})
-
-    // ===== Smooth anchor scroll offset for fixed header =====
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click',e=>{
-            e.preventDefault();
-            document.querySelector('.nav-links').classList.remove('open');
-            const target=document.querySelector(a.getAttribute('href'));
-            if(target){
-                const offset=70;
-                window.scrollTo({top:target.offsetTop-offset,behavior:'smooth'})
-            }
-        })
-    })
-</script>
+<div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true">已复制到剪贴板</div>
 </body>
 </html>
