@@ -188,7 +188,7 @@
         <div class="logo">🏃 <span>南阳跑腿</span></div>
         <button class="nav-toggle" type="button" data-nav-toggle aria-label="菜单" aria-expanded="false" aria-controls="primary-navigation">☰</button>
         <nav class="nav-links" id="primary-navigation">
-            <a href="index.html">首页</a>
+            <a href="./">首页</a>
             <a href="zhengwu.html">政务代办</a>
             <a href="yiliao.html">医疗陪诊</a>
             <a href="shenghuo.html">生活代办</a>
@@ -203,36 +203,108 @@
 
 <!-- ===== Hero ===== -->
 <section class="hero">
-    <div class="hero-content">
-        <div class="hero-badge">📍 南阳本地 · 专业跑腿服务</div>
-        <h1>
-            南阳跑腿<br>
-            <span class="highlight">同城代办 · 生活服务</span>
+    <div class="hero-flow" aria-hidden="true">
+        <div class="flow-blob flow-blob-1"></div>
+        <div class="flow-blob flow-blob-2"></div>
+        <div class="flow-blob flow-blob-3"></div>
+        <div class="flow-blob flow-blob-4"></div>
+        <div class="flow-noise"></div>
+        <div class="flow-spotlight" id="heroSpotlight"></div>
+        <canvas class="hero-particles" id="heroParticles"></canvas>
+        <div class="energy-ring energy-ring-1"></div>
+        <div class="energy-ring energy-ring-2"></div>
+        <div class="energy-ring energy-ring-3"></div>
+        <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content" id="heroContent">
+        <div class="hero-badge"><span class="live-dot" aria-hidden="true"></span> 南阳本地 · 专业跑腿服务 · 实时在线</div>
+        <h1 class="hero-title">
+            <span class="title-line" data-text="南阳跑腿">南阳跑腿</span>
+            <span class="highlight flow-text title-line">同城代办 · 生活服务</span>
         </h1>
         <p>
             生活琐事我来跑腿 · 档案调取 · 医疗挂号 · 生活代办 · 同城配送<br>
             专业、快速、诚信的一站式服务
         </p>
         <div class="hero-actions">
-            <button type="button" class="btn btn-primary" data-contact-open>💬 立即咨询</button>
-            <a href="#services" class="btn btn-outline">📋 查看服务</a>
+            <button type="button" class="btn btn-primary btn-liquid magnetic" data-contact-open>
+                <span>💬 立即咨询</span>
+            </button>
+            <a href="#services" class="btn btn-outline magnetic">📋 查看服务</a>
         </div>
         <div class="hero-stats">
-            <div class="hero-stat">
-                <div class="hero-stat-num">300+</div>
+            <div class="hero-stat tilt-card">
+                <div class="hero-stat-num" data-count="300" data-suffix="+">0</div>
                 <div class="hero-stat-label">已完成订单</div>
             </div>
-            <div class="hero-stat">
-                <div class="hero-stat-num">98%</div>
+            <div class="hero-stat tilt-card">
+                <div class="hero-stat-num" data-count="98" data-suffix="%">0</div>
                 <div class="hero-stat-label">客户好评</div>
             </div>
-            <div class="hero-stat">
-                <div class="hero-stat-num">30min</div>
+            <div class="hero-stat tilt-card">
+                <div class="hero-stat-num" data-count="30" data-suffix="min">0</div>
                 <div class="hero-stat-label">快速响应</div>
             </div>
         </div>
     </div>
+    <div class="hero-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path class="wave-path wave-a" d="M0,64 C240,120 480,0 720,48 C960,96 1200,80 1440,32 L1440,120 L0,120 Z"></path>
+            <path class="wave-path wave-b" d="M0,80 C320,20 560,110 800,70 C1040,30 1240,90 1440,60 L1440,120 L0,120 Z"></path>
+            <path class="wave-path wave-c" d="M0,90 C280,40 640,110 960,70 C1200,40 1340,85 1440,75 L1440,120 L0,120 Z"></path>
+        </svg>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+        <span></span>
+        <small>向下探索</small>
+    </div>
 </section>
+
+<!-- ===== Dual flowing marquees ===== -->
+<div class="flow-marquee-stack" aria-hidden="true">
+    <div class="flow-marquee">
+        <div class="flow-marquee-track">
+            <span>政务档案代办</span><span>·</span>
+            <span>医疗陪诊挂号</span><span>·</span>
+            <span>生活跑腿代办</span><span>·</span>
+            <span>同城快速配送</span><span>·</span>
+            <span>30分钟响应</span><span>·</span>
+            <span>南阳全市覆盖</span><span>·</span>
+            <span>价格透明</span><span>·</span>
+            <span>微信实时沟通</span><span>·</span>
+            <span>政务档案代办</span><span>·</span>
+            <span>医疗陪诊挂号</span><span>·</span>
+            <span>生活跑腿代办</span><span>·</span>
+            <span>同城快速配送</span><span>·</span>
+            <span>30分钟响应</span><span>·</span>
+            <span>南阳全市覆盖</span><span>·</span>
+            <span>价格透明</span><span>·</span>
+            <span>微信实时沟通</span><span>·</span>
+        </div>
+    </div>
+    <div class="flow-marquee flow-marquee-reverse">
+        <div class="flow-marquee-track">
+            <span>调档案</span><span>✦</span>
+            <span>陪诊挂号</span><span>✦</span>
+            <span>代取快递</span><span>✦</span>
+            <span>社保补缴</span><span>✦</span>
+            <span>公积金提取</span><span>✦</span>
+            <span>户籍迁移</span><span>✦</span>
+            <span>代交水电</span><span>✦</span>
+            <span>外地委托</span><span>✦</span>
+            <span>调档案</span><span>✦</span>
+            <span>陪诊挂号</span><span>✦</span>
+            <span>代取快递</span><span>✦</span>
+            <span>社保补缴</span><span>✦</span>
+            <span>公积金提取</span><span>✦</span>
+            <span>户籍迁移</span><span>✦</span>
+            <span>代交水电</span><span>✦</span>
+            <span>外地委托</span><span>✦</span>
+        </div>
+    </div>
+</div>
+
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
 <!-- ===== Services ===== -->
 <section id="services">
@@ -504,8 +576,8 @@
         <h2 class="reveal">立即开始</h2>
         <p class="reveal">一条微信消息，生活变简单</p>
         <div class="reveal">
-            <button type="button" class="btn btn-primary" data-contact-open style="font-size:1.05rem;padding:1rem 2.5rem">
-                💬 联系我们
+            <button type="button" class="btn btn-primary btn-liquid" data-contact-open style="font-size:1.05rem;padding:1rem 2.5rem">
+                <span>💬 联系我们</span>
             </button>
         </div>
         <p style="margin-top:1.5rem;opacity:.6;font-size:.85rem">
@@ -562,7 +634,7 @@
         </div>
         <div class="footer-col">
             <h5>快速导航</h5>
-            <a href="index.html">首页</a>
+            <a href="./">首页</a>
             <a href="zhengwu.html">政务代办</a>
             <a href="yiliao.html">医疗陪诊</a>
             <a href="shenghuo.html">生活代办</a>

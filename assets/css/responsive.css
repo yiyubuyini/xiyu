@@ -2,7 +2,7 @@
 @media(max-width:768px){
 .nav-links{display:none}
 
-.nav-toggle{display:block}
+.nav-toggle{display:block;color:inherit}
 
 .nav-links.open{
                 display:flex;flex-direction:column;
@@ -10,6 +10,16 @@
                 background:#fff;padding:1rem 1.5rem;gap:1rem;
                 border-bottom:1px solid var(--border);box-shadow:var(--shadow)
             }
+
+body:has(.hero-flow) header:not(.scrolled) .nav-links.open{
+                background:rgba(18,14,32,.97);
+                border-bottom-color:rgba(255,255,255,.08);
+                box-shadow:0 16px 40px rgba(0,0,0,.35)
+            }
+
+body:has(.hero-flow) header:not(.scrolled) .nav-links.open a{color:rgba(255,255,255,.9)}
+
+body:has(.hero-flow) header:not(.scrolled) .nav-links.open a:hover{color:#fdba74}
 
 section{padding:3.5rem 0}
 
