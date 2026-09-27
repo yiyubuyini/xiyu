@@ -1,6 +1,9 @@
 (() => {
     'use strict';
 
+    // Keep page content visible when JavaScript is unavailable.
+    document.documentElement.classList.add('js');
+
     const modal = document.getElementById('contactModal');
     const modalPanel = modal?.querySelector('.modal-panel');
     const nav = document.getElementById('primary-navigation');

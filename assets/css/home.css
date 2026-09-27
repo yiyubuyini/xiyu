@@ -1,18 +1,18 @@
 /* Home page — liquid / flowing visual system */
 
-.reveal-left{
+.js .reveal-left{
     opacity:0;transform:translateX(-40px);
     transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);
     transition-delay:var(--reveal-delay,0s)
 }
-.reveal-left.visible{opacity:1;transform:translateX(0)}
+.js .reveal-left.visible{opacity:1;transform:translateX(0)}
 
-.reveal-right{
+.js .reveal-right{
     opacity:0;transform:translateX(40px);
     transition:opacity .8s var(--ease-out),transform .8s var(--ease-out);
     transition-delay:var(--reveal-delay,0s)
 }
-.reveal-right.visible{opacity:1;transform:translateX(0)}
+.js .reveal-right.visible{opacity:1;transform:translateX(0)}
 
 .nav-links{display:flex;gap:2rem;align-items:center}
 .nav-links a{font-size:.9rem;color:var(--gray);transition:color .3s;font-weight:500}
