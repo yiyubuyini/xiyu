@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /cdn-cgi/
 
 # 百度蜘蛛
 User-agent: Baiduspider
@@ -13,7 +14,12 @@ Allow: /
 User-agent: bingbot
 Allow: /
 
-# 禁止爬取非必要内容
-Disallow: /cdn-cgi/
+# 360蜘蛛
+User-agent: 360Spider
+Allow: /
+
+# 搜狗蜘蛛
+User-agent: Sogouspider
+Allow: /
 
 Sitemap: https://nyptbb.cn/sitemap.xml

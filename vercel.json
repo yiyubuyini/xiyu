@@ -1,10 +1,25 @@
 {
-  "cleanUrls": true,
+  "cleanUrls": false,
   "redirects": [
     {
       "source": "/index.html",
       "destination": "/",
-      "permanent": true
+      "statusCode": 301
+    },
+    {
+      "source": "/(zhengwu|yiliao|shenghuo|tese|anli|wenti|guanyu)\\.html",
+      "destination": "/$1",
+      "statusCode": 301
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(zhengwu|yiliao|shenghuo|tese|anli|wenti|guanyu)",
+      "destination": "/$1.html"
+    },
+    {
+      "source": "/baidu_verify_codeva-Njb9T4paHS",
+      "destination": "/baidu_verify_codeva-Njb9T4paHS.html"
     }
   ],
   "headers": [
